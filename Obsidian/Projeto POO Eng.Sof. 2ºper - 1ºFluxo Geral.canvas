@@ -1,0 +1,33 @@
+{
+	"nodes":[
+		{"id":"e32256f58e98185e","type":"group","x":-440,"y":-220,"width":1720,"height":1940,"color":"1","label":"Cadastros"},
+		{"id":"0d7d98f8de073d6e","type":"group","x":-60,"y":720,"width":1260,"height":920,"color":"1","label":"Gerenciamento de Projetos"},
+		{"id":"a79d9a6a8aa58f29","type":"text","text":"# TB1 - Cadastro de Clientes:\nIdCliente (long);\nNome Cliente (String);\n==Categoria (Lista seleção String: Regular, VIP);==\n==Histórico de Contratos Anteriores;==\n==Pontos;==","x":-393,"y":-200,"width":633,"height":224,"color":"5"},
+		{"id":"bca1db0cc0b363a1","type":"text","text":"Acúmulo de pontos para clientes recorrentes, que podem ser trocados por descontos em futuros projetos.","x":446,"y":-11,"width":334,"height":111},
+		{"id":"ee75c1a3ab4cd018","type":"text","text":"Recomendações de novos serviços baseadas no perfil e histórico do cliente.","x":446,"y":125,"width":254,"height":106},
+		{"id":"4223b70545070430","type":"text","text":"# TB3 - Cadastro de Contrato de Consultoria:\nIdContrato (long);\nIdCliente (long)(TB1);\nNome Cliente (String)(TB1);\nData Inicio (Date);\n==Prazo(Date);==\n==Valor do Serviço (float);==\n==Desconto (float);==\nValor Liquido (float);\n==Prioridade de Atendimento (Lista seleção String: Alta, Baixa);==\n==Projetos: Lista de Tabela;==\n","x":-393,"y":260,"width":633,"height":410,"color":"5"},
+		{"id":"8f0e76ec8c861c9d","type":"text","text":"# TB2 - Cadastro de Consultores:\nIdConsultor (long);\nNome Consultor (String);\n==Especialização (Lista seleção String: Financeiro, Gestão, TI);==\n==Alocação Automática a Projetos Conforme a Demanda e Especialização;==","x":-393,"y":40,"width":633,"height":203,"color":"5"},
+		{"id":"1c4f4e62be21b45b","type":"text","text":"## Relatório de Histórico detalhado de Projetos","x":446,"y":370,"width":574,"height":72,"color":"6"},
+		{"id":"0fff3a551ee0b25d","x":446,"y":-180,"width":364,"height":60,"color":"3","type":"text","text":"Subclasses (Cliente padrão e Cliente Vip)"},
+		{"id":"b26491098c9f0718","type":"text","text":"# TB4 - Cadastro de Projetos:\nIdProjeto (long);\nIdContrato (long)(TB3);\nIdConsultor (long)(TB2);\nNome Consultor (String)(TB2);\n==Serviços (Lista seleção String: Financeiro, Gestão, TI);==\n==Etapas: Lista de Tabela;==\n","x":-40,"y":740,"width":540,"height":260,"color":"5"},
+		{"id":"19d3cb8b16482ca4","type":"text","text":"# TB5 - Etapas:\nIdProjeto (long)(TB4);\n==Nome (Lista seleção String: Análise Inicial, Implementação, Revisão Final);==\n==Status (Lista seleção String: Em Aberto, Em Andamento, Aguardando, Concluído);==\n==Pagamento (float);==\n==Faturamento (int);==","x":300,"y":1020,"width":640,"height":220,"color":"5"},
+		{"id":"d2a1a9df6af60b96","type":"text","text":"## Relatório de Desempenho:\nRelatório de desempenho periódico do projeto com detalhes de cada etapa.","x":300,"y":1260,"width":640,"height":120,"color":"6"},
+		{"id":"6348cd6272a1b677","type":"text","text":"## Relatório de Desempenho VIP:\nRelatório de desempenho periódico do projeto com detalhes de cada etapa com insights adicionais e recomendações exclusivas.","x":300,"y":1400,"width":640,"height":140,"color":"6"},
+		{"id":"e6b2e2a9a6a24fa9","type":"text","text":"Controle de pagamento e emissão de faturas detalhadas, com descontos aplicados para clientes VIP.","x":811,"y":785,"width":258,"height":131},
+		{"id":"0f1f776984d2050e","type":"text","text":"Alocação automática de Consultor a projetos conforme a demanda e especialização.","x":540,"y":740,"width":250,"height":141}
+	],
+	"edges":[
+		{"id":"7bffe4b8fb6e0d8f","fromNode":"b26491098c9f0718","fromSide":"bottom","toNode":"19d3cb8b16482ca4","toSide":"left","color":"5"},
+		{"id":"ee44423ab60145d7","fromNode":"b26491098c9f0718","fromSide":"bottom","toNode":"d2a1a9df6af60b96","toSide":"left","color":"6"},
+		{"id":"49b341541a038e33","fromNode":"4223b70545070430","fromSide":"bottom","toNode":"0d7d98f8de073d6e","toSide":"left","color":"1"},
+		{"id":"3ae54072b692e2a9","fromNode":"b26491098c9f0718","fromSide":"bottom","toNode":"6348cd6272a1b677","toSide":"left","color":"6"},
+		{"id":"bed0d7a59f30656a","fromNode":"4223b70545070430","fromSide":"right","toNode":"1c4f4e62be21b45b","toSide":"left","color":"6"},
+		{"id":"3dcebc12a04b3aa8","fromNode":"a79d9a6a8aa58f29","fromSide":"right","toNode":"bca1db0cc0b363a1","toSide":"left","toEnd":"none"},
+		{"id":"c99697caa2d5f3ab","fromNode":"4223b70545070430","fromSide":"right","toNode":"bca1db0cc0b363a1","toSide":"left","toEnd":"none"},
+		{"id":"972016a8a8f9449a","fromNode":"a79d9a6a8aa58f29","fromSide":"right","toNode":"ee75c1a3ab4cd018","toSide":"left","toEnd":"none"},
+		{"id":"d736c750911be406","fromNode":"4223b70545070430","fromSide":"right","toNode":"ee75c1a3ab4cd018","toSide":"left","toEnd":"none"},
+		{"id":"315c479e7b94f4ee","fromNode":"19d3cb8b16482ca4","fromSide":"right","toNode":"e6b2e2a9a6a24fa9","toSide":"bottom","toEnd":"none"},
+		{"id":"3c56d4c008c1fd56","fromNode":"b26491098c9f0718","fromSide":"right","toNode":"0f1f776984d2050e","toSide":"left","toEnd":"none"},
+		{"id":"6e7ba24d6abb3d6c","fromNode":"a79d9a6a8aa58f29","fromSide":"right","toNode":"0fff3a551ee0b25d","toSide":"left","toEnd":"none","color":"3"}
+	]
+}
