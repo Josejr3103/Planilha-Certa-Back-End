@@ -1,4 +1,4 @@
-package com.planilhacerta.planilha_certa;
+package com.teamten.planilha_certa;
 
 public class Projetos {
     private long idProjeto;
@@ -7,6 +7,7 @@ public class Projetos {
     private long idContrato;
     private long idConsultor;
     private String servico;
+
     private String etapas;public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String servico, String etapas) {
         this.idProjeto = idProjeto;
         this.nomeProjeto = nomeProjeto;
@@ -73,3 +74,4 @@ public class Projetos {
         this.etapas = etapas;
     }
 }
+

@@ -1,4 +1,7 @@
-package com.planilhacerta.planilha_certa;
+package com.teamten.planilha_certa.Controller;
+
+import com.teamten.planilha_certa.Projetos;
+import com.teamten.planilha_certa.Service.ProjetosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
