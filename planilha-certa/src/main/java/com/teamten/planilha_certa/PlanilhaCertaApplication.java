@@ -1,5 +1,6 @@
 package com.teamten.planilha_certa;
 
+import com.teamten.planilha_certa.Service.ClienteService;
 import com.teamten.planilha_certa.Service.ProjetosService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -53,6 +54,24 @@ public class PlanilhaCertaApplication {
 		System.out.println("Projeto cadastrado: " + projetoCadastrado2.getNomeProjeto());
 
 
+
+
+
+
+		// Exemplo de uso de ClienteService
+		ClienteService clienteService = context.getBean(ClienteService.class);
+
+		ClienteVip clienteVip = new ClienteVip(0, "José", "Contrato1, Contrato2", 150);
+		ClientePadrao clientePadrao = new ClientePadrao(0, "Warney", "Contrato3", 50);
+
+		Cliente clienteVipCadastrado = clienteService.cadastrarCliente(clienteVip);
+		Cliente clientePadraoCadastrado = clienteService.cadastrarCliente(clientePadrao);
+
+		System.out.println("Cliente VIP cadastrado: " + clienteVipCadastrado.getNomeCliente());
+		System.out.println("Cliente Padrão cadastrado: " + clientePadraoCadastrado.getNomeCliente());
+
+		// Liste todos os clientes
+		clienteService.listarClientes().forEach(cliente -> System.out.println("Cliente: " + cliente.getNomeCliente()));
 	}
 
 
