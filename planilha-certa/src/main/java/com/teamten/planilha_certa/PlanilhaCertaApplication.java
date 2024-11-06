@@ -1,5 +1,6 @@
 package com.teamten.planilha_certa;
 
+import com.teamten.planilha_certa.Service.ConsultorService;
 import com.teamten.planilha_certa.Service.ClienteService;
 import com.teamten.planilha_certa.Service.ProjetosService;
 import org.springframework.boot.SpringApplication;
@@ -72,6 +73,36 @@ public class PlanilhaCertaApplication {
 
 		// Liste todos os clientes
 		clienteService.listarClientes().forEach(cliente -> System.out.println("Cliente: " + cliente.getNomeCliente()));
+
+
+
+
+
+
+		// Exemplo de uso de ConsultorService
+		ConsultorService consultorService = context.getBean(ConsultorService.class);
+
+		ConsultorEspeciFinanceiro consultorFinanceiro = new ConsultorEspeciFinanceiro(0, "Reinaldo");
+		ConsultorEspeciGestao consultorGestao = new ConsultorEspeciGestao(0, "Felipe");
+		ConsultorEspeciTI consultorTI = new ConsultorEspeciTI(0, "Alexandre");
+
+		Consultor consultorFinanceiroCadastrado = consultorService.criarConsultor(consultorFinanceiro);
+		Consultor consultorGestaoCadastrado = consultorService.criarConsultor(consultorGestao);
+		Consultor consultorTICadastrado = consultorService.criarConsultor(consultorTI);
+
+		System.out.println("Consultor Financeiro cadastrado: " + consultorFinanceiroCadastrado.getNomeConsultor());
+		System.out.println("Consultor Gestão cadastrado: " + consultorGestaoCadastrado.getNomeConsultor());
+		System.out.println("Consultor TI cadastrado: " + consultorTICadastrado.getNomeConsultor());
+
+		// Liste todos os consultores
+		consultorService.listarConsultores().forEach(consultor -> System.out.println("Consultor: " + consultor.getNomeConsultor()));
+
+
+
+
+
+
+
 	}
 
 
