@@ -42,4 +42,20 @@ public class ListaDeContratos {
          }
       }
    }
+
+   public void imprimirContrato(long IdContrato) {
+      for (Consultoria cadastro : this.cadastros) {
+         if (cadastro.getIdContrato() == IdContrato) {
+            System.out.println("ID do Contrato: " + cadastro.getIdContrato());
+            System.out.println("Data de Início: " + cadastro.getDataInicio());
+            System.out.println("Prazo: " + cadastro.getPrazo());
+            System.out.println("Valor do Serviço: " + cadastro.getValorServico());
+            System.out.println("Desconto: " + cadastro.getDesconto());
+            System.out.println("Valor Líquido: " + cadastro.getValorLiquido());
+            return;
+         }
+      }
+      System.out.println("Contrato com ID " + IdContrato + " não encontrado.");
+   }
+
 }
