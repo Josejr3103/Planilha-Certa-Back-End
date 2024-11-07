@@ -2,6 +2,7 @@ package com.teamten.planilha_certa;
 
 import com.teamten.planilha_certa.Service.ConsultorService;
 import com.teamten.planilha_certa.Service.ClienteService;
+import com.teamten.planilha_certa.Service.EtapasService;
 import com.teamten.planilha_certa.Service.ProjetosService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -99,7 +100,23 @@ public class PlanilhaCertaApplication {
 
 
 
+		// Exemplo de uso de EtapasService
+		EtapasService etapasService = context.getBean(EtapasService.class);
 
+		EtapasAnaliseInicial etapaAnalise = new EtapasAnaliseInicial(1, 1000.0f, 200);
+		EtapasImplementacao etapaImplementacao = new EtapasImplementacao(2, 2000.0f, 500);
+		EtapasRevisaoFinal etapaRevisao = new EtapasRevisaoFinal(3, 500.0f, 100);
+
+		Etapas etapaAnaliseCadastrada = etapasService.criarEtapa(etapaAnalise);
+		Etapas etapaImplementacaoCadastrada = etapasService.criarEtapa(etapaImplementacao);
+		Etapas etapaRevisaoCadastrada = etapasService.criarEtapa(etapaRevisao);
+
+		System.out.println("Etapa Análise Inicial cadastrada: " + etapaAnaliseCadastrada.getNome());
+		System.out.println("Etapa Implementação cadastrada: " + etapaImplementacaoCadastrada.getNome());
+		System.out.println("Etapa Revisão Final cadastrada: " + etapaRevisaoCadastrada.getNome());
+
+		// Liste todas as etapas
+		etapasService.listarEtapas().forEach(etapa -> System.out.println("Etapa: " + etapa.getNome()));
 
 
 
