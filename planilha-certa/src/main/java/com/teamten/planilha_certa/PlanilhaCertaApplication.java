@@ -1,12 +1,11 @@
 package com.teamten.planilha_certa;
 
-import com.teamten.planilha_certa.Service.ConsultorService;
-import com.teamten.planilha_certa.Service.ClienteService;
-import com.teamten.planilha_certa.Service.EtapasService;
-import com.teamten.planilha_certa.Service.ProjetosService;
+import com.teamten.planilha_certa.Service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import java.sql.Date;
 
 @SpringBootApplication
 public class PlanilhaCertaApplication {
@@ -118,7 +117,20 @@ public class PlanilhaCertaApplication {
 		// Liste todas as etapas
 		etapasService.listarEtapas().forEach(etapa -> System.out.println("Etapa: " + etapa.getNome()));
 
+		// Exemplo de uso de ContratoService
+		ContratoService contratoService = context.getBean(ContratoService.class);
 
+		ContratoPriorAlta contratoAlta = new ContratoPriorAlta(0, 123, "Cliente A", new Date(1), new Date(System.currentTimeMillis() + 86400000L), 10000.0f, 500.0f);
+		ContratoPriorBaixa contratoBaixa = new ContratoPriorBaixa(0, 456, "Cliente B", new Date(2), new Date(System.currentTimeMillis() + 172800000L), 8000.0f, 300.0f);
+
+		ContratoPriorAlta contratoAltaCadastrado = contratoService.criarContratoPriorAlta(contratoAlta);
+		ContratoPriorBaixa contratoBaixaCadastrado = contratoService.criarContratoPriorBaixa(contratoBaixa);
+
+		System.out.println("Contrato Prioridade Alta cadastrado: " + contratoAltaCadastrado.getNomeCliente());
+		System.out.println("Contrato Prioridade Baixa cadastrado: " + contratoBaixaCadastrado.getNomeCliente());
+
+		// Liste todos os contratos
+		contratoService.listarContratos().forEach(contrato -> System.out.println("Contrato: " + contrato.getNomeCliente()));
 
 	}
 

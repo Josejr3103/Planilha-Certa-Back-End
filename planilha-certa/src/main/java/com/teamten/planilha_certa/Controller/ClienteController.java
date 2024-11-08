@@ -1,6 +1,8 @@
 package com.teamten.planilha_certa.Controller;
 
 import com.teamten.planilha_certa.Cliente;
+import com.teamten.planilha_certa.ClientePadrao;
+import com.teamten.planilha_certa.ClienteVip;
 import com.teamten.planilha_certa.Service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,15 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping
-    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
-        Cliente novoCliente = clienteService.cadastrarCliente(cliente);
+    @PostMapping("/padrao")
+    public ResponseEntity<ClientePadrao> cadastrarClientePadrao(@RequestBody ClientePadrao cliente) {
+        ClientePadrao novoCliente = clienteService.cadastrarClientePadrao(cliente);
+        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/vip")
+    public ResponseEntity<ClienteVip> cadastrarClienteVip(@RequestBody ClienteVip cliente) {
+        ClienteVip novoCliente = clienteService.cadastrarClienteVip(cliente);
         return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
 
