@@ -27,25 +27,6 @@ public class ProjetosService {
         return null;
     }
 
-    public Projetos copiarProjeto(long id) {
-        Projetos projetoExistente = database.get(id);
-        if (projetoExistente != null) {
-            long novoId = idCounter.incrementAndGet();
-            Projetos novoProjeto = new Projetos(
-                    novoId,
-                    projetoExistente.getNomeProjeto(),
-                    projetoExistente.getDescricaoProjeto(),
-                    projetoExistente.getIdContrato(),
-                    projetoExistente.getIdConsultor(),
-                    projetoExistente.getServico(),
-                    projetoExistente.getEtapas()
-            );
-            database.put(novoId, novoProjeto);
-            return novoProjeto;
-        }
-        return null;
-    }
-
     public boolean excluirProjeto(long id) {
         return database.remove(id) != null;
     }

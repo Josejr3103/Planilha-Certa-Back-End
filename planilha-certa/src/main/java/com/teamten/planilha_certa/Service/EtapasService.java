@@ -1,6 +1,9 @@
 package com.teamten.planilha_certa.Service;
 
 import com.teamten.planilha_certa.Etapas;
+import com.teamten.planilha_certa.EtapasAnaliseInicial;
+import com.teamten.planilha_certa.EtapasImplementacao;
+import com.teamten.planilha_certa.EtapasRevisaoFinal;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,7 +15,21 @@ public class EtapasService {
     private final Map<Long, Etapas> etapasDatabase = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong();
 
-    public Etapas criarEtapa(Etapas etapa) {
+    public EtapasAnaliseInicial criarEtapaAnaliseInicial(EtapasAnaliseInicial etapa) {
+        long id = idCounter.incrementAndGet();
+        etapa.setIdProjeto(id);
+        etapasDatabase.put(id, etapa);
+        return etapa;
+    }
+
+    public EtapasImplementacao criarEtapaImplementacao(EtapasImplementacao etapa) {
+        long id = idCounter.incrementAndGet();
+        etapa.setIdProjeto(id);
+        etapasDatabase.put(id, etapa);
+        return etapa;
+    }
+
+    public EtapasRevisaoFinal criarEtapaRevisaoFinal(EtapasRevisaoFinal etapa) {
         long id = idCounter.incrementAndGet();
         etapa.setIdProjeto(id);
         etapasDatabase.put(id, etapa);

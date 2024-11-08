@@ -31,15 +31,6 @@ public class ProjetosController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/copiar/{id}")
-    public ResponseEntity<Projetos> copiarProjeto(@PathVariable long id) {
-        Projetos novoProjeto = projetosService.copiarProjeto(id);
-        if (novoProjeto != null) {
-            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
-        }
-        return ResponseEntity.notFound().build();
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirProjeto(@PathVariable long id) {
         if (projetosService.excluirProjeto(id)) {

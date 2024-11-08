@@ -1,6 +1,9 @@
 package com.teamten.planilha_certa.Controller;
 
 import com.teamten.planilha_certa.Consultor;
+import com.teamten.planilha_certa.ConsultorEspeciFinanceiro;
+import com.teamten.planilha_certa.ConsultorEspeciGestao;
+import com.teamten.planilha_certa.ConsultorEspeciTI;
 import com.teamten.planilha_certa.Service.ConsultorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +19,21 @@ public class ConsultorController {
     @Autowired
     private ConsultorService consultorService;
 
-    @PostMapping
-    public ResponseEntity<Consultor> criarConsultor(@RequestBody Consultor consultor) {
-        Consultor novoConsultor = consultorService.criarConsultor(consultor);
+    @PostMapping("/EspeciFinanceiro")
+    public ResponseEntity<Consultor> criarConsultorEspeciFinanceiro(@RequestBody ConsultorEspeciFinanceiro consultor) {
+        ConsultorEspeciFinanceiro novoConsultor = consultorService.criarConsultorEspeciFinanceiro(consultor);
+        return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/EspeciGestao")
+    public ResponseEntity<Consultor> criarConsultorEspeciGestao(@RequestBody ConsultorEspeciGestao consultor) {
+        ConsultorEspeciGestao novoConsultor = consultorService.criarConsultorEspeciGestao(consultor);
+        return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/EspeciTI")
+    public ResponseEntity<Consultor> criarConsultorEspeciTI(@RequestBody ConsultorEspeciTI consultor) {
+        ConsultorEspeciTI novoConsultor = consultorService.criarConsultorEspeciTI(consultor);
         return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
     }
 

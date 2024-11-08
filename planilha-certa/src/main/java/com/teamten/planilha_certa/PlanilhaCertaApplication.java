@@ -34,14 +34,6 @@ public class PlanilhaCertaApplication {
 			System.out.println("Projeto não encontrado para edição.");
 		}
 
-		// Copie o projeto
-		Projetos projetoCopiado = projetosService.copiarProjeto(projetoCadastrado.getIdProjeto());
-		if (projetoCopiado != null) {
-			System.out.println("Projeto copiado: " + projetoCopiado.getNomeProjeto() + " com novo ID: " + projetoCopiado.getIdProjeto());
-		} else {
-			System.out.println("Projeto não copiado.");
-		}
-
 		// Exclua o projeto
 		boolean excluido = projetosService.excluirProjeto(projetoCadastrado.getIdProjeto());
 		System.out.println("Projeto excluído: " + (excluido ? "Sim" : "Não"));
@@ -65,8 +57,8 @@ public class PlanilhaCertaApplication {
 		ClienteVip clienteVip = new ClienteVip(0, "José", "Contrato1, Contrato2", 150);
 		ClientePadrao clientePadrao = new ClientePadrao(0, "Warney", "Contrato3", 50);
 
-		Cliente clienteVipCadastrado = clienteService.cadastrarCliente(clienteVip);
-		Cliente clientePadraoCadastrado = clienteService.cadastrarCliente(clientePadrao);
+		Cliente clienteVipCadastrado = clienteService.cadastrarClienteVip(clienteVip);
+		Cliente clientePadraoCadastrado = clienteService.cadastrarClientePadrao(clientePadrao);
 
 		System.out.println("Cliente VIP cadastrado: " + clienteVipCadastrado.getNomeCliente());
 		System.out.println("Cliente Padrão cadastrado: " + clientePadraoCadastrado.getNomeCliente());
@@ -86,9 +78,9 @@ public class PlanilhaCertaApplication {
 		ConsultorEspeciGestao consultorGestao = new ConsultorEspeciGestao(0, "Felipe");
 		ConsultorEspeciTI consultorTI = new ConsultorEspeciTI(0, "Alexandre");
 
-		Consultor consultorFinanceiroCadastrado = consultorService.criarConsultor(consultorFinanceiro);
-		Consultor consultorGestaoCadastrado = consultorService.criarConsultor(consultorGestao);
-		Consultor consultorTICadastrado = consultorService.criarConsultor(consultorTI);
+		Consultor consultorFinanceiroCadastrado = consultorService.criarConsultorEspeciFinanceiro(consultorFinanceiro);
+		Consultor consultorGestaoCadastrado = consultorService.criarConsultorEspeciGestao(consultorGestao);
+		Consultor consultorTICadastrado = consultorService.criarConsultorEspeciTI(consultorTI);
 
 		System.out.println("Consultor Financeiro cadastrado: " + consultorFinanceiroCadastrado.getNomeConsultor());
 		System.out.println("Consultor Gestão cadastrado: " + consultorGestaoCadastrado.getNomeConsultor());
@@ -106,9 +98,9 @@ public class PlanilhaCertaApplication {
 		EtapasImplementacao etapaImplementacao = new EtapasImplementacao(2, 2000.0f, 500);
 		EtapasRevisaoFinal etapaRevisao = new EtapasRevisaoFinal(3, 500.0f, 100);
 
-		Etapas etapaAnaliseCadastrada = etapasService.criarEtapa(etapaAnalise);
-		Etapas etapaImplementacaoCadastrada = etapasService.criarEtapa(etapaImplementacao);
-		Etapas etapaRevisaoCadastrada = etapasService.criarEtapa(etapaRevisao);
+		Etapas etapaAnaliseCadastrada = etapasService.criarEtapaAnaliseInicial(etapaAnalise);
+		Etapas etapaImplementacaoCadastrada = etapasService.criarEtapaImplementacao(etapaImplementacao);
+		Etapas etapaRevisaoCadastrada = etapasService.criarEtapaRevisaoFinal(etapaRevisao);
 
 		System.out.println("Etapa Análise Inicial cadastrada: " + etapaAnaliseCadastrada.getNome());
 		System.out.println("Etapa Implementação cadastrada: " + etapaImplementacaoCadastrada.getNome());
@@ -116,6 +108,15 @@ public class PlanilhaCertaApplication {
 
 		// Liste todas as etapas
 		etapasService.listarEtapas().forEach(etapa -> System.out.println("Etapa: " + etapa.getNome()));
+
+
+
+
+
+
+
+
+
 
 		// Exemplo de uso de ContratoService
 		ContratoService contratoService = context.getBean(ContratoService.class);

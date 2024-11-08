@@ -1,6 +1,9 @@
 package com.teamten.planilha_certa.Controller;
 
 import com.teamten.planilha_certa.Etapas;
+import com.teamten.planilha_certa.EtapasAnaliseInicial;
+import com.teamten.planilha_certa.EtapasImplementacao;
+import com.teamten.planilha_certa.EtapasRevisaoFinal;
 import com.teamten.planilha_certa.Service.EtapasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +19,21 @@ public class EtapasController {
     @Autowired
     private EtapasService etapasService;
 
-    @PostMapping
-    public ResponseEntity<Etapas> criarEtapa(@RequestBody Etapas etapa) {
-        Etapas novaEtapa = etapasService.criarEtapa(etapa);
+    @PostMapping("/AnaliseInicial")
+    public ResponseEntity<Etapas> criarEtapaAnaliseInicial(@RequestBody EtapasAnaliseInicial etapa) {
+        EtapasAnaliseInicial novaEtapa = etapasService.criarEtapaAnaliseInicial(etapa);
+        return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/Implementacao")
+    public ResponseEntity<Etapas> criarEtapaImplementacao(@RequestBody EtapasImplementacao etapa) {
+        EtapasImplementacao novaEtapa = etapasService.criarEtapaImplementacao(etapa);
+        return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/RevisaoFinal")
+    public ResponseEntity<Etapas> criarEtapaRevisaoFinal(@RequestBody EtapasRevisaoFinal etapa) {
+        EtapasRevisaoFinal novaEtapa = etapasService.criarEtapaRevisaoFinal(etapa);
         return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
     }
 

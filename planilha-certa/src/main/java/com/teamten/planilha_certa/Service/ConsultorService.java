@@ -1,6 +1,9 @@
 package com.teamten.planilha_certa.Service;
 
 import com.teamten.planilha_certa.Consultor;
+import com.teamten.planilha_certa.ConsultorEspeciFinanceiro;
+import com.teamten.planilha_certa.ConsultorEspeciGestao;
+import com.teamten.planilha_certa.ConsultorEspeciTI;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,7 +15,21 @@ public class ConsultorService {
     private final Map<Long, Consultor> consultoresDatabase = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong();
 
-    public Consultor criarConsultor(Consultor consultor) {
+    public ConsultorEspeciFinanceiro criarConsultorEspeciFinanceiro(ConsultorEspeciFinanceiro consultor) {
+        long id = idCounter.incrementAndGet();
+        consultor.setIdConsultor(id);
+        consultoresDatabase.put(id, consultor);
+        return consultor;
+    }
+
+    public ConsultorEspeciGestao criarConsultorEspeciGestao(ConsultorEspeciGestao consultor) {
+        long id = idCounter.incrementAndGet();
+        consultor.setIdConsultor(id);
+        consultoresDatabase.put(id, consultor);
+        return consultor;
+    }
+
+    public ConsultorEspeciTI criarConsultorEspeciTI(ConsultorEspeciTI consultor) {
         long id = idCounter.incrementAndGet();
         consultor.setIdConsultor(id);
         consultoresDatabase.put(id, consultor);

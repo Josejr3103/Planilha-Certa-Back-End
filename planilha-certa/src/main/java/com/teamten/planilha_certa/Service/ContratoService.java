@@ -28,8 +28,8 @@ public class ContratoService {
         return contrato;
     }
 
-    public ContratoPriorAlta editarContratoPriorAlta(long id, ContratoPriorAlta contratoAtualizado) {
-        if (contratoDatabase.containsKey(id) && contratoAtualizado.getPrioridadeAtendimento().equals("Alta")) {
+    public Contrato editarContrato(long id, Contrato contratoAtualizado) {
+        if (contratoDatabase.containsKey(id)) {
             contratoAtualizado.setIdContrato(id);
             contratoDatabase.put(id, contratoAtualizado);
             return contratoAtualizado;
@@ -37,31 +37,8 @@ public class ContratoService {
         return null;
     }
 
-    public ContratoPriorBaixa editarContratoPriorBaixa(long id, ContratoPriorBaixa contratoAtualizado) {
-        if (contratoDatabase.containsKey(id) && contratoAtualizado.getPrioridadeAtendimento().equals("Baixa")) {
-            contratoAtualizado.setIdContrato(id);
-            contratoDatabase.put(id, contratoAtualizado);
-            return contratoAtualizado;
-        }
-        return null;
-    }
-
-    public boolean excluirContratoPriorAlta(long id) {
-        Contrato contrato = contratoDatabase.get(id);
-        if (contrato != null && contrato.getPrioridadeAtendimento().equals("Alta")) {
-            contratoDatabase.remove(id);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean excluirContratoPriorBaixa(long id) {
-        Contrato contrato = contratoDatabase.get(id);
-        if (contrato != null && contrato.getPrioridadeAtendimento().equals("Baixa")) {
-            contratoDatabase.remove(id);
-            return true;
-        }
-        return false;
+    public boolean excluirContrato(long id) {
+        return contratoDatabase.remove(id)!= null;
     }
 
     public List<Contrato> listarContratos() {

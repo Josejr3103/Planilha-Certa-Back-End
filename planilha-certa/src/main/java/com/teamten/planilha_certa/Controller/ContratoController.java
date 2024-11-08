@@ -30,35 +30,18 @@ public class ContratoController {
         return new ResponseEntity<>(novoContrato, HttpStatus.CREATED);
     }
 
-    @PutMapping("/prior-alta/{id}")
-    public ResponseEntity<ContratoPriorAlta> editarContratoPriorAlta(@PathVariable long id, @RequestBody ContratoPriorAlta contratoAtualizado) {
-        ContratoPriorAlta contratoEditado = contratoService.editarContratoPriorAlta(id, contratoAtualizado);
+    @PutMapping
+    public ResponseEntity<Contrato> editarContrato(long id, Contrato contratoAtualizado) {
+        Contrato contratoEditado = contratoService.editarContrato(id, contratoAtualizado);
         if (contratoEditado != null) {
             return ResponseEntity.ok(contratoEditado);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/prior-baixa/{id}")
-    public ResponseEntity<ContratoPriorBaixa> editarContratoPriorBaixa(@PathVariable long id, @RequestBody ContratoPriorBaixa contratoAtualizado) {
-        ContratoPriorBaixa contratoEditado = contratoService.editarContratoPriorBaixa(id, contratoAtualizado);
-        if (contratoEditado != null) {
-            return ResponseEntity.ok(contratoEditado);
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/prior-alta/{id}")
-    public ResponseEntity<Void> excluirContratoPriorAlta(@PathVariable long id) {
-        if (contratoService.excluirContratoPriorAlta(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/prior-baixa/{id}")
-    public ResponseEntity<Void> excluirContratoPriorBaixa(@PathVariable long id) {
-        if (contratoService.excluirContratoPriorBaixa(id)) {
+    @DeleteMapping
+    public ResponseEntity<Void> excluirContrato(long id) {
+        if (contratoService.excluirContrato(id)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();

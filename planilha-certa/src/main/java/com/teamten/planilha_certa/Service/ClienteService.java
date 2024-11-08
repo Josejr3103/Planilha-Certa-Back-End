@@ -3,6 +3,7 @@ package com.teamten.planilha_certa.Service;
 import com.teamten.planilha_certa.Cliente;
 import com.teamten.planilha_certa.ClientePadrao;
 import com.teamten.planilha_certa.ClienteVip;
+import com.teamten.planilha_certa.Consultor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -33,6 +34,19 @@ public class ClienteService {
         cliente.setIdCliente(id);
         clientesDatabase.put(id, cliente);
         return cliente;
+    }
+
+    public Cliente editarCliente(long id, Cliente clienteAtualizado) {
+        if (clientesDatabase.containsKey(id)) {
+            clienteAtualizado.setIdCliente(id);
+            clientesDatabase.put(id, clienteAtualizado);
+            return clienteAtualizado;
+        }
+        return null;
+    }
+
+    public boolean excluirCliente(long id) {
+        return clientesDatabase.remove(id) != null;
     }
 
     public List<Cliente> listarClientes() {
