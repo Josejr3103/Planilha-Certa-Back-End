@@ -1,6 +1,6 @@
 package com.teamten.planilha_certa.Service;
 
-import com.teamten.planilha_certa.Projetos;
+import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;

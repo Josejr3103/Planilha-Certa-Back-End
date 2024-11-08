@@ -1,4 +1,4 @@
-package com.teamten.planilha_certa;
+package com.teamten.planilha_certa.ClassTB1Cliente;
 
 public class Cliente {
     private long idCliente;
@@ -6,6 +6,9 @@ public class Cliente {
     private String categoriaCliente;
     private String historicoContratos;
     private int pontos;
+
+    public Cliente() {
+    }
 
     public Cliente(long idCliente, String nomeCliente, String categoriaCliente, String historicoContratos, int pontos) {
         this.idCliente = idCliente;

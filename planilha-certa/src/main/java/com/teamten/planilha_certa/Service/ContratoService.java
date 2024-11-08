@@ -1,8 +1,8 @@
 package com.teamten.planilha_certa.Service;
 
-import com.teamten.planilha_certa.Contrato;
-import com.teamten.planilha_certa.ContratoPriorAlta;
-import com.teamten.planilha_certa.ContratoPriorBaixa;
+import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorBaixa;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

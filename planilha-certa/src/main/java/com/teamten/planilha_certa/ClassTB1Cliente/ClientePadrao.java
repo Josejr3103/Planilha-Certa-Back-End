@@ -1,4 +1,4 @@
-package com.teamten.planilha_certa;
+package com.teamten.planilha_certa.ClassTB1Cliente;
 
 public class ClientePadrao extends Cliente {
 

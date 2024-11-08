@@ -1,9 +1,9 @@
 package com.teamten.planilha_certa.Service;
 
-import com.teamten.planilha_certa.Consultor;
-import com.teamten.planilha_certa.ConsultorEspeciFinanceiro;
-import com.teamten.planilha_certa.ConsultorEspeciGestao;
-import com.teamten.planilha_certa.ConsultorEspeciTI;
+import com.teamten.planilha_certa.ClassTB2Consultor.Consultor;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciFinanceiro;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciGestao;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciTI;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

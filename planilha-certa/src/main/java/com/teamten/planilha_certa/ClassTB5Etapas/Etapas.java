@@ -1,4 +1,4 @@
-package com.teamten.planilha_certa;
+package com.teamten.planilha_certa.ClassTB5Etapas;
 
 public class Etapas {
     private long idProjeto;

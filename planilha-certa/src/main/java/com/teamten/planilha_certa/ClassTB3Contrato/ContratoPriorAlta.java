@@ -1,4 +1,4 @@
-package com.teamten.planilha_certa;
+package com.teamten.planilha_certa.ClassTB3Contrato;
 
 import java.util.Date;
 

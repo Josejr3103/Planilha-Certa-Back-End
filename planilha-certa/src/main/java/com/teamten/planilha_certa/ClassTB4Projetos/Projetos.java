@@ -1,4 +1,4 @@
-package com.teamten.planilha_certa;
+package com.teamten.planilha_certa.ClassTB4Projetos;
 
 public class Projetos {
     private long idProjeto;

@@ -1,5 +1,19 @@
 package com.teamten.planilha_certa;
 
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorBaixa;
+import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasRevisaoFinal;
+import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
+import com.teamten.planilha_certa.ClassTB1Cliente.Cliente;
+import com.teamten.planilha_certa.ClassTB1Cliente.ClientePadrao;
+import com.teamten.planilha_certa.ClassTB1Cliente.ClienteVip;
+import com.teamten.planilha_certa.ClassTB2Consultor.Consultor;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciFinanceiro;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciGestao;
+import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciTI;
 import com.teamten.planilha_certa.Service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -51,7 +65,7 @@ public class PlanilhaCertaApplication {
 
 
 
-		// Exemplo de uso de ClienteService
+		/*// Exemplo de uso de ClienteService
 		ClienteService clienteService = context.getBean(ClienteService.class);
 
 		ClienteVip clienteVip = new ClienteVip(0, "José", "Contrato1, Contrato2", 150);
@@ -66,7 +80,7 @@ public class PlanilhaCertaApplication {
 		// Liste todos os clientes
 		clienteService.listarClientes().forEach(cliente -> System.out.println("Cliente: " + cliente.getNomeCliente()));
 
-
+*/
 
 
 
