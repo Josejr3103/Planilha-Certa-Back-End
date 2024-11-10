@@ -1,6 +1,6 @@
 package com.teamten.planilha_certa.Controller;
 
-import com.teamten.planilha_certa.Projetos;
+import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
 import com.teamten.planilha_certa.Service.ProjetosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,15 +27,6 @@ public class ProjetosController {
         Projetos projetoEditado = projetosService.editarProjeto(id, projetoAtualizado);
         if (projetoEditado != null) {
             return ResponseEntity.ok(projetoEditado);
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/copiar/{id}")
-    public ResponseEntity<Projetos> copiarProjeto(@PathVariable long id) {
-        Projetos novoProjeto = projetosService.copiarProjeto(id);
-        if (novoProjeto != null) {
-            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
         }
         return ResponseEntity.notFound().build();
     }
