@@ -77,31 +77,35 @@ private Firestore firestore;
         return listaProjetos;
     }
 
+    public boolean editarProjeto(Projetos projeto) {
+        // Atualiza o projeto existente
+        CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+        ApiFuture<WriteResult> future = projetos.document(String.valueOf(projeto.getIdProjeto())).set(projeto);
 
-
-
-
-
-
-
-
-    /*
-    public Projetos editarProjeto(long id, Projetos projetoAtualizado) {
-        if (database.containsKey(id)) {
-            projetoAtualizado.setIdProjeto(id);
-            database.put(id, projetoAtualizado);
-            return projetoAtualizado;
+        try {
+            future.get();
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
         }
-        return null;
     }
 
-    public boolean excluirProjeto(long id) {
-        return database.remove(id) != null;
+    public boolean excluirProjeto(long idProjeto) {
+        // Exclui o projeto pelo ID
+        CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+        ApiFuture<WriteResult> future = projetos.document(String.valueOf(idProjeto)).delete();
+
+        try {
+            future.get();
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public List<Projetos> listarProjetos() {
-        return new ArrayList<>(database.values());
-    }
 
-     */
+
+
 }
