@@ -19,45 +19,33 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping("/padrao")
-    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
-        Cliente novoCliente = clienteService.cadastrarCliente(cliente);
-        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
-    }
-
-/*
-    @PostMapping("/padrao")
     public ResponseEntity<ClientePadrao> cadastrarClientePadrao(@RequestBody ClientePadrao cliente) {
         ClientePadrao novoCliente = clienteService.cadastrarClientePadrao(cliente);
-        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+        if (novoCliente != null) {
+            return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/vip")
     public ResponseEntity<ClienteVip> cadastrarClienteVip(@RequestBody ClienteVip cliente) {
         ClienteVip novoCliente = clienteService.cadastrarClienteVip(cliente);
-        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+        if (novoCliente != null) {
+            return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> editarCliente(@PathVariable long id, @RequestBody Cliente clienteAtualizado) {
-        Cliente clienteEditado = clienteService.editarCliente(id, clienteAtualizado);
-        if (clienteEditado != null) {
-            return ResponseEntity.ok(clienteEditado);
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirCliente(@PathVariable long id) {
-        if (clienteService.excluirCliente(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-*/
     @GetMapping
     public ResponseEntity<List<Cliente>> listarClientes() {
         List<Cliente> clientes = clienteService.listarClientes();
-        return ResponseEntity.ok(clientes);
-    }
 
+        if (clientes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(clientes); // Retorna 200 OK com a lista de clientes
+        }
+    }
 }

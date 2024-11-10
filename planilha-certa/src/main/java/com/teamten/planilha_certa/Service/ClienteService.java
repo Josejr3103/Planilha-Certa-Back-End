@@ -1,8 +1,10 @@
 package com.teamten.planilha_certa.Service;
 
+import com.google.cloud.firestore.*;
 import com.teamten.planilha_certa.ClassTB1Cliente.Cliente;
 import com.teamten.planilha_certa.ClassTB1Cliente.ClientePadrao;
 import com.teamten.planilha_certa.ClassTB1Cliente.ClienteVip;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,26 +12,69 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 @Service
-public class ClienteService {
+public class ClienteService {@Autowired
+private Firestore firestore;
 
-    @Autowired
-    private Firestore firestore;
+    private static final String COLLECTION_NAME = "clientes";
+    private final AtomicLong idCounter = new AtomicLong();
 
-    private final String COLLECTION_NAME = "clientes";
+    @PostConstruct
+    public void init() {
+        initializeIdCounter();
+    }
 
-    public Cliente cadastrarCliente(Cliente cliente) {
+    private void initializeIdCounter() {
+        try {
+            CollectionReference clientes = firestore.collection(COLLECTION_NAME);
+            ApiFuture<QuerySnapshot> query = clientes.get();
+            List<QueryDocumentSnapshot> documents = query.get().getDocuments();
+
+            long maxId = 0;
+            for (QueryDocumentSnapshot document : documents) {
+                Cliente cliente = document.toObject(Cliente.class);
+                maxId = Math.max(maxId, cliente.getIdCliente());
+            }
+
+            idCounter.set(maxId);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to initialize ID counter", e);
+        }
+    }
+
+    public ClientePadrao cadastrarClientePadrao(ClientePadrao cliente) {
+        long newId = idCounter.incrementAndGet();
+        cliente.setIdCliente(newId);
+
+        cliente.setCategoriaCliente("Padrão");
+
         CollectionReference clientes = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = clientes.document(String.valueOf(cliente.getIdCliente())).set(cliente);
+        ApiFuture<WriteResult> future = clientes.document(String.valueOf(newId)).set(cliente);
 
         try {
-            future.get();  // Aguarda o Firestore concluir a operação
+            future.get();
+            return cliente;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ClienteVip cadastrarClienteVip(ClienteVip cliente) {
+        long newId = idCounter.incrementAndGet();
+        cliente.setIdCliente(newId);
+
+        cliente.setCategoriaCliente("Vip");
+
+        CollectionReference clientes = firestore.collection(COLLECTION_NAME);
+        ApiFuture<WriteResult> future = clientes.document(String.valueOf(newId)).set(cliente);
+
+        try {
+            future.get();
             return cliente;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -38,19 +83,21 @@ public class ClienteService {
     }
 
     public List<Cliente> listarClientes() {
+        List<Cliente> listaClientes = new ArrayList<>();
         try {
             CollectionReference clientes = firestore.collection(COLLECTION_NAME);
-            List<Cliente> listaClientes = new ArrayList<>();
-            clientes.get().get().forEach(document -> {
+            ApiFuture<QuerySnapshot> future = clientes.get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
                 Cliente cliente = document.toObject(Cliente.class);
                 listaClientes.add(cliente);
-            });
-            return listaClientes;
+            }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-            return new ArrayList<>();
         }
+        return listaClientes;
     }
+}
 
 
 
@@ -96,4 +143,4 @@ public class ClienteService {
         return new ArrayList<>(clientesDatabase.values());
     }
 */
-}
+
