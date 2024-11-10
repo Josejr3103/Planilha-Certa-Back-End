@@ -1,6 +1,6 @@
 package com.teamten.planilha_certa.Service;
 
-import com.teamten.planilha_certa.Projetos;
+import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -23,25 +23,6 @@ public class ProjetosService {
             projetoAtualizado.setIdProjeto(id);
             database.put(id, projetoAtualizado);
             return projetoAtualizado;
-        }
-        return null;
-    }
-
-    public Projetos copiarProjeto(long id) {
-        Projetos projetoExistente = database.get(id);
-        if (projetoExistente != null) {
-            long novoId = idCounter.incrementAndGet();
-            Projetos novoProjeto = new Projetos(
-                    novoId,
-                    projetoExistente.getNomeProjeto(),
-                    projetoExistente.getDescricaoProjeto(),
-                    projetoExistente.getIdContrato(),
-                    projetoExistente.getIdConsultor(),
-                    projetoExistente.getServico(),
-                    projetoExistente.getEtapas()
-            );
-            database.put(novoId, novoProjeto);
-            return novoProjeto;
         }
         return null;
     }
