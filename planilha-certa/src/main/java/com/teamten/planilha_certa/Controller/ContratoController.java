@@ -1,8 +1,8 @@
 package com.teamten.planilha_certa.Controller;
 
-import com.teamten.planilha_certa.Contrato;
-import com.teamten.planilha_certa.ContratoPriorAlta;
-import com.teamten.planilha_certa.ContratoPriorBaixa;
+import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorBaixa;
 import com.teamten.planilha_certa.Service.ContratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

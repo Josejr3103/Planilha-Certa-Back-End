@@ -1,9 +1,9 @@
 package com.teamten.planilha_certa.Service;
 
-import com.teamten.planilha_certa.Etapas;
-import com.teamten.planilha_certa.EtapasAnaliseInicial;
-import com.teamten.planilha_certa.EtapasImplementacao;
-import com.teamten.planilha_certa.EtapasRevisaoFinal;
+import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
+import com.teamten.planilha_certa.ClassTB5Etapas.EtapasRevisaoFinal;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
