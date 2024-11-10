@@ -34,6 +34,14 @@ public class PlanilhaCertaApplication {
 		// Obtenha o bean do serviço
 		ProjetosService projetosService = context.getBean(ProjetosService.class);
 
+
+
+
+
+
+
+
+/*
 		// Crie um novo projeto para testar o cadastro
 		Projetos novoProjeto = new Projetos(0, "Projeto Teste do Reinaldo", "Descrição Teste", 123, 456, "Serviço Teste", "Etapas Teste");
 		Projetos projetoCadastrado = projetosService.cadastrarProjeto(novoProjeto);
@@ -68,7 +76,7 @@ public class PlanilhaCertaApplication {
 
 
 
-		/*// Exemplo de uso de ClienteService
+		// Exemplo de uso de ClienteService
 		ClienteService clienteService = context.getBean(ClienteService.class);
 
 		ClienteVip clienteVip = new ClienteVip(0, "José", "Contrato1, Contrato2", 150);

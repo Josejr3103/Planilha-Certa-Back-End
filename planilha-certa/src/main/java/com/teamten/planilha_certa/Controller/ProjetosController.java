@@ -17,11 +17,17 @@ public class ProjetosController {
     private ProjetosService projetosService;
 
     @PostMapping
-    public ResponseEntity<Projetos> cadastrarProjeto(@RequestBody Projetos projeto) {
-        Projetos novoProjeto = projetosService.cadastrarProjeto(projeto);
-        return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
+    public ResponseEntity<Projetos> cadastrarProjeto(@RequestBody Projetos projetos) {
+        Projetos novoProjeto = projetosService.cadastrarProjeto(projetos);
+        if (novoProjeto != null) {
+            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+
+    /*
     @PutMapping("/{id}")
     public ResponseEntity<Projetos> editarProjeto(@PathVariable long id, @RequestBody Projetos projetoAtualizado) {
         Projetos projetoEditado = projetosService.editarProjeto(id, projetoAtualizado);
@@ -38,10 +44,17 @@ public class ProjetosController {
         }
         return ResponseEntity.notFound().build();
     }
+    */
+
 
     @GetMapping
     public ResponseEntity<List<Projetos>> listarProjetos() {
         List<Projetos> projetos = projetosService.listarProjetos();
-        return ResponseEntity.ok(projetos);
+
+        if (projetos.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(projetos); // Retorna 200 OK com a lista
+        }
     }
 }
