@@ -28,4 +28,6 @@ public class FirebaseConfig {
 
         return FirestoreClient.getFirestore();
     }
+
+
 }

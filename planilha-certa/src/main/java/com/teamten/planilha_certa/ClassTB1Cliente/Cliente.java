@@ -43,6 +43,7 @@ public class Cliente {
         this.categoriaCliente = categoriaCliente;
     }
 
+
     public String getHistoricoContratos() {
         return historicoContratos;
     }
