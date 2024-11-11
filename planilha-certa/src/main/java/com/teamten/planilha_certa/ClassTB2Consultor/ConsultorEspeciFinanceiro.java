@@ -6,5 +6,7 @@ public class ConsultorEspeciFinanceiro extends Consultor {
         super(idConsultor, nomeConsultor, "Financeiro");
     }
 
+    public ConsultorEspeciFinanceiro(){
+    }
     // Métodos específicos para ConsultorEspeciFinanceiro podem ser adicionados aqui
 }

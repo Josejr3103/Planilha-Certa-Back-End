@@ -10,6 +10,9 @@ public class Consultor {
         this.nomeConsultor = nomeConsultor;
         this.especializacao = especializacao;
     }
+    
+    public Consultor(){
+    }
 
     // Getters e Setters
     public long getIdConsultor() {

@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/consultores")
 public class ConsultorController {
-
+/* 
     @Autowired
     private ConsultorService consultorService;
 
@@ -58,5 +58,5 @@ public class ConsultorController {
     public ResponseEntity<List<Consultor>> listarConsultores() {
         List<Consultor> consultores = consultorService.listarConsultores();
         return ResponseEntity.ok(consultores);
-    }
+    } */
 }

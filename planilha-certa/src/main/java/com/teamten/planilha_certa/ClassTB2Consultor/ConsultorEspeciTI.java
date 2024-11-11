@@ -6,5 +6,7 @@ public class ConsultorEspeciTI extends Consultor {
         super(idConsultor, nomeConsultor, "TI");
     }
 
+    public ConsultorEspeciTI(){
+    }
     // Métodos específicos para ConsultorEspeciTI podem ser adicionados aqui
 }

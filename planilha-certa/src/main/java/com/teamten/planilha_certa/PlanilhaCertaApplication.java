@@ -41,7 +41,7 @@ public class PlanilhaCertaApplication {
 
 
 
-/*
+/* 
 		// Crie um novo projeto para testar o cadastro
 		Projetos novoProjeto = new Projetos(0, "Projeto Teste do Reinaldo", "Descrição Teste", 123, 456, "Serviço Teste", "Etapas Teste");
 		Projetos projetoCadastrado = projetosService.cadastrarProjeto(novoProjeto);
@@ -91,7 +91,7 @@ public class PlanilhaCertaApplication {
 		// Liste todos os clientes
 		clienteService.listarClientes().forEach(cliente -> System.out.println("Cliente: " + cliente.getNomeCliente()));
 
-*/
+
 
 
 
@@ -114,7 +114,7 @@ public class PlanilhaCertaApplication {
 		// Liste todos os consultores
 		consultorService.listarConsultores().forEach(consultor -> System.out.println("Consultor: " + consultor.getNomeConsultor()));
 
-
+*/
 
 		// Exemplo de uso de EtapasService
 		EtapasService etapasService = context.getBean(EtapasService.class);

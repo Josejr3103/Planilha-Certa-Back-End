@@ -11,12 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+
 @Configuration
 public class FirebaseConfig {
 
     @Bean
     public Firestore firestore() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("C:/Users/daldo/OneDrive/Área de Trabalho/GitHub/Planilha-Certa-Back-End/planilha-certa/src/main/java/com/teamten/planilha_certa/planilhacerta-114b1-firebase-adminsdk-mpy8f-322e882417.json");
+        FileInputStream serviceAccount = new FileInputStream("C:/Users/Felipe/Documents/GitHub/Planilha-Certa-Back-End/planilha-certa/src/main/java/com/teamten/planilha_certa/planilhacerta-114b1-firebase-adminsdk-mpy8f-322e882417.json");
 
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
