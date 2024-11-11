@@ -20,44 +20,64 @@ public class ConsultorController {
     @Autowired
     private ConsultorService consultorService;
 
-    @PostMapping("/EspeciFinanceiro")
-    public ResponseEntity<Consultor> criarConsultorEspeciFinanceiro(@RequestBody ConsultorEspeciFinanceiro consultor) {
-        ConsultorEspeciFinanceiro novoConsultor = consultorService.criarConsultorEspeciFinanceiro(consultor);
-        return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/EspeciGestao")
-    public ResponseEntity<Consultor> criarConsultorEspeciGestao(@RequestBody ConsultorEspeciGestao consultor) {
-        ConsultorEspeciGestao novoConsultor = consultorService.criarConsultorEspeciGestao(consultor);
-        return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/EspeciTI")
-    public ResponseEntity<Consultor> criarConsultorEspeciTI(@RequestBody ConsultorEspeciTI consultor) {
-        ConsultorEspeciTI novoConsultor = consultorService.criarConsultorEspeciTI(consultor);
-        return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Consultor> editarConsultor(@PathVariable long id, @RequestBody Consultor consultorAtualizado) {
-        Consultor consultorEditado = consultorService.editarConsultor(id, consultorAtualizado);
-        if (consultorEditado != null) {
-            return ResponseEntity.ok(consultorEditado);
+    @PostMapping("/financeiro")
+    public ResponseEntity<ConsultorEspeciFinanceiro> cadastrarConsultorEspeciFinanceiro(@RequestBody ConsultorEspeciFinanceiro consultor) {
+        ConsultorEspeciFinanceiro novoConsultor = consultorService.cadastrarConsultorEspeciFinanceiro(consultor);
+        if (novoConsultor != null) {
+            return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirConsultor(@PathVariable long id) {
-        if (consultorService.excluirConsultor(id)) {
-            return ResponseEntity.noContent().build();
+    @PostMapping("/gestao")
+    public ResponseEntity<ConsultorEspeciGestao> cadastrarConsultorEspeciGestao(@RequestBody ConsultorEspeciGestao consultor) {
+        ConsultorEspeciGestao novoConsultor = consultorService.cadastrarConsultorEspeciGestao(consultor);
+        if (novoConsultor != null) {
+            return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/ti")
+    public ResponseEntity<ConsultorEspeciTI> cadastrarConsultorEspeciTI(@RequestBody ConsultorEspeciTI consultor) {
+        ConsultorEspeciTI novoConsultor = consultorService.cadastrarConsultorEspeciTI(consultor);
+        if (novoConsultor != null) {
+            return new ResponseEntity<>(novoConsultor, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping
     public ResponseEntity<List<Consultor>> listarConsultores() {
         List<Consultor> consultores = consultorService.listarConsultores();
-        return ResponseEntity.ok(consultores);
+        if (consultores.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(consultores); // Retorna 200 OK com a lista de consultores
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editarConsultor(@PathVariable("id") long idConsultor, @RequestBody Consultor consultor) {
+        consultor.setIdConsultor(idConsultor);
+        boolean atualizado = consultorService.editarConsultor(consultor);
+        if (atualizado) {
+            return ResponseEntity.ok("Consultor atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar consultor.");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluirConsultor(@PathVariable("id") long idConsultor) {
+        boolean excluido = consultorService.excluirConsultor(idConsultor);
+        if (excluido) {
+            return ResponseEntity.ok("Consultor excluído com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir consultor.");
+        }
     }
 }

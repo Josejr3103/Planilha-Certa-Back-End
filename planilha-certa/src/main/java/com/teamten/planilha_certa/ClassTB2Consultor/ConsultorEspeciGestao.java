@@ -6,5 +6,8 @@ public class ConsultorEspeciGestao extends Consultor {
         super(idConsultor, nomeConsultor, "Gestão");
     }
 
+    public ConsultorEspeciGestao() {
+    }
+
     // Métodos específicos para ConsultorEspeciGestao podem ser adicionados aqui
 }

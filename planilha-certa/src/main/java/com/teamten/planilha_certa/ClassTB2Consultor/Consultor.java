@@ -11,6 +11,9 @@ public class Consultor {
         this.especializacao = especializacao;
     }
 
+    public Consultor() {
+    }
+
     // Getters e Setters
     public long getIdConsultor() {
         return idConsultor;

@@ -28,6 +28,9 @@ public class Contrato {
         this.prioridadeAtendimento = prioridadeAtendimento;
     }
 
+    public Contrato() {
+    }
+
     // Getters e Setters
     public long getIdContrato() {
         return idContrato;
@@ -67,7 +70,6 @@ public class Contrato {
 
     public void setPrazo(Date prazo) {
         this.prazo = prazo;
-        this.prazoDescricao = prazo.toString();
     }
 
     public String getPrazoDescricao() {
