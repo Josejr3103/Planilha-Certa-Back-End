@@ -134,7 +134,7 @@ public class PlanilhaCertaApplication {
 
 
 
-
+		/* 
 		// Exemplo de uso de ContratoService
 		ContratoService contratoService = context.getBean(ContratoService.class);
 
@@ -149,7 +149,7 @@ public class PlanilhaCertaApplication {
 
 		// Liste todos os contratos
 		contratoService.listarContratos().forEach(contrato -> System.out.println("Contrato: " + contrato.getNomeCliente()));
-
+		*/
 	}
 
 
