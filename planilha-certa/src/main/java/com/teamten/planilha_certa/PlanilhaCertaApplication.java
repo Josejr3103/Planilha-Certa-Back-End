@@ -128,7 +128,7 @@ public class PlanilhaCertaApplication {
 		// Liste todos os contratos
 		contratoService.listarContratos().forEach(contrato -> System.out.println("Contrato: " + contrato.getNomeCliente()));
 
-*/
+
 
 		// Exemplo de uso de EtapasService
 		EtapasService etapasService = context.getBean(EtapasService.class);
@@ -150,6 +150,8 @@ public class PlanilhaCertaApplication {
 
 
 
+
+		 */
 
 
 

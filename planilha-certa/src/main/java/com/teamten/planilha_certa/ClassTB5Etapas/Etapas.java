@@ -2,17 +2,22 @@ package com.teamten.planilha_certa.ClassTB5Etapas;
 
 public class Etapas {
     private long idProjeto;
+    private long idEtapa;
     private String nome;
     private EtapaStatus statusDaEtapa;
     private float pagamento;
     private int faturamento;
 
-    public Etapas(long idProjeto, String nome, EtapaStatus statusDaEtapa, float pagamento, int faturamento) {
+    public Etapas(long idProjeto, long idEtapa, String nome, EtapaStatus statusDaEtapa, float pagamento, int faturamento) {
         this.idProjeto = idProjeto;
+        this.idEtapa = idEtapa;
         this.nome = nome;
         this.statusDaEtapa = statusDaEtapa;
         this.pagamento = pagamento;
         this.faturamento = faturamento;
+    }
+
+    public Etapas() {
     }
 
     // Getters e Setters
@@ -22,6 +27,14 @@ public class Etapas {
 
     public void setIdProjeto(long idProjeto) {
         this.idProjeto = idProjeto;
+    }
+
+    public long getIdEtapa() {
+        return idEtapa;
+    }
+
+    public void setIdEtapa(long idEtapa) {
+        this.idEtapa = idEtapa;
     }
 
     public String getNome() {

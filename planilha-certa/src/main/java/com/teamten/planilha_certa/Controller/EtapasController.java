@@ -1,5 +1,7 @@
 package com.teamten.planilha_certa.Controller;
 
+import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
+import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
 import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
 import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
 import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
@@ -20,44 +22,74 @@ public class EtapasController {
     @Autowired
     private EtapasService etapasService;
 
-    @PostMapping("/AnaliseInicial")
-    public ResponseEntity<Etapas> criarEtapaAnaliseInicial(@RequestBody EtapasAnaliseInicial etapa) {
-        EtapasAnaliseInicial novaEtapa = etapasService.criarEtapaAnaliseInicial(etapa);
-        return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/Implementacao")
-    public ResponseEntity<Etapas> criarEtapaImplementacao(@RequestBody EtapasImplementacao etapa) {
-        EtapasImplementacao novaEtapa = etapasService.criarEtapaImplementacao(etapa);
-        return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/RevisaoFinal")
-    public ResponseEntity<Etapas> criarEtapaRevisaoFinal(@RequestBody EtapasRevisaoFinal etapa) {
-        EtapasRevisaoFinal novaEtapa = etapasService.criarEtapaRevisaoFinal(etapa);
-        return new ResponseEntity<>(novaEtapa, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Etapas> editarEtapa(@PathVariable long id, @RequestBody Etapas etapaAtualizada) {
-        Etapas etapaEditada = etapasService.editarEtapa(id, etapaAtualizada);
-        if (etapaEditada != null) {
-            return ResponseEntity.ok(etapaEditada);
+    @PostMapping("/analiseinicial")
+    public ResponseEntity<EtapasAnaliseInicial> cadastrarEtapasAnaliseInicial(@RequestBody EtapasAnaliseInicial etapa) {
+        EtapasAnaliseInicial novoEtapa = etapasService.cadastrarEtapasAnaliseInicial(etapa);
+        if (novoEtapa != null) {
+            return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirEtapa(@PathVariable long id) {
-        if (etapasService.excluirEtapa(id)) {
-            return ResponseEntity.noContent().build();
+    @PostMapping("/implementacao")
+    public ResponseEntity<EtapasImplementacao> cadastrarEtapasImplementacao(@RequestBody EtapasImplementacao etapa) {
+        EtapasImplementacao novoEtapa = etapasService.cadastrarEtapasImplementacao(etapa);
+        if (novoEtapa != null) {
+            return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/revisaofinal")
+    public ResponseEntity<EtapasRevisaoFinal> cadastrarEtapasRevisaoFinal(@RequestBody EtapasRevisaoFinal etapa) {
+        EtapasRevisaoFinal novoEtapa = etapasService.cadastrarEtapasRevisaoFinal(etapa);
+        if (novoEtapa != null) {
+            return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping
     public ResponseEntity<List<Etapas>> listarEtapas() {
         List<Etapas> etapas = etapasService.listarEtapas();
-        return ResponseEntity.ok(etapas);
+        if (etapas.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(etapas); // Retorna 200 OK com a lista de etapas
+        }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editarEtapa(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+        etapas.setIdEtapa(idEtapa);
+        boolean atualizado = etapasService.editarEtapa(etapas);
+        if (atualizado) {
+            return ResponseEntity.ok("Etapa atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Etapa.");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluirEtapa(@PathVariable("id") long idEtapa) {
+        boolean excluido = etapasService.excluirEtapa(idEtapa);
+        if (excluido) {
+            return ResponseEntity.ok("Etapa excluído com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir Etapa.");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }

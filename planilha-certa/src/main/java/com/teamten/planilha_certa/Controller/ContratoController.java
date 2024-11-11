@@ -1,6 +1,5 @@
 package com.teamten.planilha_certa.Controller;
 
-import com.teamten.planilha_certa.ClassTB2Consultor.Consultor;
 import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
 import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
 import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorBaixa;

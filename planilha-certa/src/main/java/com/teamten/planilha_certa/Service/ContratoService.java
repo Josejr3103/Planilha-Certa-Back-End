@@ -20,7 +20,6 @@ public class ContratoService {
     @Autowired
     private Firestore firestore;
 
-
     private static final String COLLECTION_NAME = "contratos";
     private final AtomicLong idCounter = new AtomicLong();
 
@@ -52,7 +51,7 @@ public class ContratoService {
         long newId = idCounter.incrementAndGet();
         contrato.setIdContrato(newId);
 
-        contrato.setPrioridadeAtendimento("alta");
+        contrato.setPrioridadeAtendimento("Alta");
 
         CollectionReference contratos = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = contratos.document(String.valueOf(newId)).set(contrato);
@@ -70,7 +69,7 @@ public class ContratoService {
         long newId = idCounter.incrementAndGet();
         contrato.setIdContrato(newId);
 
-        contrato.setPrioridadeAtendimento("baixa");
+        contrato.setPrioridadeAtendimento("Baixa");
 
         CollectionReference contratos = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = contratos.document(String.valueOf(newId)).set(contrato);
@@ -127,5 +126,4 @@ public class ContratoService {
             return false;
         }
     }
-
 }
