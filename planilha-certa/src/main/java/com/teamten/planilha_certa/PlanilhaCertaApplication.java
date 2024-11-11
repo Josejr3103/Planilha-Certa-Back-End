@@ -31,17 +31,10 @@ public class PlanilhaCertaApplication {
 
 		ApplicationContext context = SpringApplication.run(PlanilhaCertaApplication.class, args);
 
+		/*
 		// Obtenha o bean do serviço
 		ProjetosService projetosService = context.getBean(ProjetosService.class);
 
-
-
-
-
-
-
-
-/*
 		// Crie um novo projeto para testar o cadastro
 		Projetos novoProjeto = new Projetos(0, "Projeto Teste do Reinaldo", "Descrição Teste", 123, 456, "Serviço Teste", "Etapas Teste");
 		Projetos projetoCadastrado = projetosService.cadastrarProjeto(novoProjeto);
@@ -91,7 +84,7 @@ public class PlanilhaCertaApplication {
 		// Liste todos os clientes
 		clienteService.listarClientes().forEach(cliente -> System.out.println("Cliente: " + cliente.getNomeCliente()));
 
-*/
+
 
 
 
@@ -116,6 +109,27 @@ public class PlanilhaCertaApplication {
 
 
 
+
+
+
+
+		// Exemplo de uso de ContratoService
+		ContratoService contratoService = context.getBean(ContratoService.class);
+
+		ContratoPriorAlta contratoAlta = new ContratoPriorAlta(0, 123, "Cliente A", new Date(1), new Date(System.currentTimeMillis() + 86400000L), 10000.0f, 500.0f);
+		ContratoPriorBaixa contratoBaixa = new ContratoPriorBaixa(0, 456, "Cliente B", new Date(2), new Date(System.currentTimeMillis() + 172800000L), 8000.0f, 300.0f);
+
+		ContratoPriorAlta contratoAltaCadastrado = contratoService.criarContratoPriorAlta(contratoAlta);
+		ContratoPriorBaixa contratoBaixaCadastrado = contratoService.criarContratoPriorBaixa(contratoBaixa);
+
+		System.out.println("Contrato Prioridade Alta cadastrado: " + contratoAltaCadastrado.getNomeCliente());
+		System.out.println("Contrato Prioridade Baixa cadastrado: " + contratoBaixaCadastrado.getNomeCliente());
+
+		// Liste todos os contratos
+		contratoService.listarContratos().forEach(contrato -> System.out.println("Contrato: " + contrato.getNomeCliente()));
+
+
+
 		// Exemplo de uso de EtapasService
 		EtapasService etapasService = context.getBean(EtapasService.class);
 
@@ -137,26 +151,13 @@ public class PlanilhaCertaApplication {
 
 
 
+		 */
 
 
 
 
 
 
-		// Exemplo de uso de ContratoService
-		ContratoService contratoService = context.getBean(ContratoService.class);
-
-		ContratoPriorAlta contratoAlta = new ContratoPriorAlta(0, 123, "Cliente A", new Date(1), new Date(System.currentTimeMillis() + 86400000L), 10000.0f, 500.0f);
-		ContratoPriorBaixa contratoBaixa = new ContratoPriorBaixa(0, 456, "Cliente B", new Date(2), new Date(System.currentTimeMillis() + 172800000L), 8000.0f, 300.0f);
-
-		ContratoPriorAlta contratoAltaCadastrado = contratoService.criarContratoPriorAlta(contratoAlta);
-		ContratoPriorBaixa contratoBaixaCadastrado = contratoService.criarContratoPriorBaixa(contratoBaixa);
-
-		System.out.println("Contrato Prioridade Alta cadastrado: " + contratoAltaCadastrado.getNomeCliente());
-		System.out.println("Contrato Prioridade Baixa cadastrado: " + contratoBaixaCadastrado.getNomeCliente());
-
-		// Liste todos os contratos
-		contratoService.listarContratos().forEach(contrato -> System.out.println("Contrato: " + contrato.getNomeCliente()));
 
 	}
 

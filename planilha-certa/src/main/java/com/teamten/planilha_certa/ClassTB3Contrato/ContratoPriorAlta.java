@@ -8,4 +8,7 @@ public class ContratoPriorAlta extends Contrato {
                              float valorServico, float desconto) {
         super(idContrato, idCliente, nomeCliente, dataInicio, prazo, valorServico, desconto, "Alta");
     }
+
+    public ContratoPriorAlta() {
+    }
 }

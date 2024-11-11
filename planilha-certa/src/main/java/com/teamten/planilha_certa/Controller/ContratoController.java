@@ -19,38 +19,56 @@ public class ContratoController {
     @Autowired
     private ContratoService contratoService;
 
-    @PostMapping("/prior-alta")
-    public ResponseEntity<ContratoPriorAlta> criarContratoPriorAlta(@RequestBody ContratoPriorAlta contrato) {
-        ContratoPriorAlta novoContrato = contratoService.criarContratoPriorAlta(contrato);
-        return new ResponseEntity<>(novoContrato, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/prior-baixa")
-    public ResponseEntity<ContratoPriorBaixa> criarContratoPriorBaixa(@RequestBody ContratoPriorBaixa contrato) {
-        ContratoPriorBaixa novoContrato = contratoService.criarContratoPriorBaixa(contrato);
-        return new ResponseEntity<>(novoContrato, HttpStatus.CREATED);
-    }
-
-    @PutMapping
-    public ResponseEntity<Contrato> editarContrato(long id, Contrato contratoAtualizado) {
-        Contrato contratoEditado = contratoService.editarContrato(id, contratoAtualizado);
-        if (contratoEditado != null) {
-            return ResponseEntity.ok(contratoEditado);
+    @PostMapping("/alta")
+    public ResponseEntity<ContratoPriorAlta> cadastrarContratoPriorAlta(@RequestBody ContratoPriorAlta contrato) {
+        ContratoPriorAlta novoContrato = contratoService.cadastrarContratoPriorAlta(contrato);
+        if (novoContrato != null) {
+            return new ResponseEntity<>(novoContrato, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> excluirContrato(long id) {
-        if (contratoService.excluirContrato(id)) {
-            return ResponseEntity.noContent().build();
+    @PostMapping("/baixa")
+    public ResponseEntity<ContratoPriorBaixa> cadastrarContratoPriorBaixa(@RequestBody ContratoPriorBaixa contrato) {
+        ContratoPriorBaixa novoContrato = contratoService.cadastrarContratoPriorBaixa(contrato);
+        if (novoContrato != null) {
+            return new ResponseEntity<>(novoContrato, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
     }
 
     @GetMapping
     public ResponseEntity<List<Contrato>> listarContratos() {
         List<Contrato> contratos = contratoService.listarContratos();
-        return ResponseEntity.ok(contratos);
+        if (contratos.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(contratos); // Retorna 200 OK com a lista de contratos
+        }
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editarContrato(@PathVariable("id") long idContrato, @RequestBody Contrato contrato) {
+        contrato.setIdContrato(idContrato);
+        boolean atualizado = contratoService.editarContrato(contrato);
+        if (atualizado) {
+            return ResponseEntity.ok("Contrato atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Contrato.");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluirContrato(@PathVariable("id") long idContrato) {
+        boolean excluido = contratoService.excluirContrato(idContrato);
+        if (excluido) {
+            return ResponseEntity.ok("Contrato excluído com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir Contrato.");
+        }
+    }
+
 }
