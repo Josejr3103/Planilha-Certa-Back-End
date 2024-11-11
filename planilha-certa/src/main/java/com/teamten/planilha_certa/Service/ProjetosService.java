@@ -28,8 +28,8 @@ private Firestore firestore;
 
     private void initializeIdCounter() {
         try {
-            CollectionReference clientes = firestore.collection(COLLECTION_NAME);
-            ApiFuture<QuerySnapshot> query = clientes.get();
+            CollectionReference projeto = firestore.collection(COLLECTION_NAME);
+            ApiFuture<QuerySnapshot> query = projeto.get();
             List<QueryDocumentSnapshot> documents = query.get().getDocuments();
 
             long maxId = 0;
