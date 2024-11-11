@@ -97,50 +97,36 @@ private Firestore firestore;
         }
         return listaClientes;
     }
+
+    public boolean editarCliente(Cliente cliente) {
+        // Atualiza o cliente existente
+        CollectionReference clientes = firestore.collection(COLLECTION_NAME);
+        ApiFuture<WriteResult> future = clientes.document(String.valueOf(cliente.getIdCliente())).set(cliente);
+
+        try {
+            future.get();
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean excluirCliente(long idCliente) {
+        // Exclui o cliente pelo ID
+        CollectionReference clientes = firestore.collection(COLLECTION_NAME);
+        ApiFuture<WriteResult> future = clientes.document(String.valueOf(idCliente)).delete();
+
+        try {
+            future.get();
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
 
 
-
-
-
-
-/*
-
-
-    private final Map<Long, Cliente> clientesDatabase = new HashMap<>();
-    private final AtomicLong idCounter = new AtomicLong();
-
-
-
-    public ClientePadrao cadastrarClientePadrao(ClientePadrao cliente) {
-        long id = idCounter.incrementAndGet();
-        cliente.setIdCliente(id);
-        clientesDatabase.put(id, cliente);
-        return cliente;
-    }
-
-    public ClienteVip cadastrarClienteVip(ClienteVip cliente) {
-        long id = idCounter.incrementAndGet();
-        cliente.setIdCliente(id);
-        clientesDatabase.put(id, cliente);
-        return cliente;
-    }
-
-    public Cliente editarCliente(long id, Cliente clienteAtualizado) {
-        if (clientesDatabase.containsKey(id)) {
-            clienteAtualizado.setIdCliente(id);
-            clientesDatabase.put(id, clienteAtualizado);
-            return clienteAtualizado;
-        }
-        return null;
-    }
-
-    public boolean excluirCliente(long id) {
-        return clientesDatabase.remove(id) != null;
-    }
-
-    public List<Cliente> listarClientes() {
-        return new ArrayList<>(clientesDatabase.values());
-    }
-*/
 

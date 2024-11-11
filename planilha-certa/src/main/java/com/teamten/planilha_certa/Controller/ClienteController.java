@@ -48,4 +48,25 @@ public class ClienteController {
             return ResponseEntity.ok(clientes); // Retorna 200 OK com a lista de clientes
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editarCliente(@PathVariable("id") long idCliente, @RequestBody Cliente cliente) {
+        cliente.setIdCliente(idCliente);
+        boolean atualizado = clienteService.editarCliente(cliente);
+        if (atualizado) {
+            return ResponseEntity.ok("Cliente atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar cliente.");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluirCliente(@PathVariable("id") long idCliente) {
+        boolean excluido = clienteService.excluirCliente(idCliente);
+        if (excluido) {
+            return ResponseEntity.ok("Cliente excluído com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir cliente.");
+        }
+    }
 }

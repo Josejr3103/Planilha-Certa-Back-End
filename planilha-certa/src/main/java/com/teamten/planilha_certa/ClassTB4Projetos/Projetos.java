@@ -7,8 +7,12 @@ public class Projetos {
     private long idContrato;
     private long idConsultor;
     private String servico;
+    private String etapas;
 
-    private String etapas;public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String servico, String etapas) {
+    public Projetos(){
+    }
+
+    public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String servico, String etapas) {
         this.idProjeto = idProjeto;
         this.nomeProjeto = nomeProjeto;
         this.descricaoProjeto = descricaoProjeto;

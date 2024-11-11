@@ -17,31 +17,44 @@ public class ProjetosController {
     private ProjetosService projetosService;
 
     @PostMapping
-    public ResponseEntity<Projetos> cadastrarProjeto(@RequestBody Projetos projeto) {
-        Projetos novoProjeto = projetosService.cadastrarProjeto(projeto);
-        return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Projetos> editarProjeto(@PathVariable long id, @RequestBody Projetos projetoAtualizado) {
-        Projetos projetoEditado = projetosService.editarProjeto(id, projetoAtualizado);
-        if (projetoEditado != null) {
-            return ResponseEntity.ok(projetoEditado);
+    public ResponseEntity<Projetos> cadastrarProjeto(@RequestBody Projetos projetos) {
+        Projetos novoProjeto = projetosService.cadastrarProjeto(projetos);
+        if (novoProjeto != null) {
+            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirProjeto(@PathVariable long id) {
-        if (projetosService.excluirProjeto(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
     }
 
     @GetMapping
     public ResponseEntity<List<Projetos>> listarProjetos() {
         List<Projetos> projetos = projetosService.listarProjetos();
-        return ResponseEntity.ok(projetos);
+
+        if (projetos.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se a lista estiver vazia
+        } else {
+            return ResponseEntity.ok(projetos); // Retorna 200 OK com a lista
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editarProjeto(@PathVariable("id") long idProjeto, @RequestBody Projetos projeto) {
+        projeto.setIdProjeto(idProjeto); // Define o ID do projeto com o valor do caminho da URL
+        boolean atualizado = projetosService.editarProjeto(projeto);
+        if (atualizado) {
+            return ResponseEntity.ok("Projeto atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar projeto.");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluirProjeto(@PathVariable("id") long idProjeto) {
+        boolean excluido = projetosService.excluirProjeto(idProjeto);
+        if (excluido) {
+            return ResponseEntity.ok("Projeto excluído com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir projeto.");
+        }
     }
 }
