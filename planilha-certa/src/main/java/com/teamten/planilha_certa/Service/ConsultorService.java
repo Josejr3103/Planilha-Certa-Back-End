@@ -53,8 +53,6 @@ public class ConsultorService {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
 
-        consultor.setEspecializacao("Financeiro");
-
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);
 
@@ -71,8 +69,6 @@ public class ConsultorService {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
 
-        consultor.setEspecializacao("Gestão");
-
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);
 
@@ -88,8 +84,6 @@ public class ConsultorService {
     public ConsultorEspeciTI cadastrarConsultorEspeciTI(ConsultorEspeciTI consultor) {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
-
-        consultor.setEspecializacao("TI");
 
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);

@@ -31,6 +31,7 @@ public class PlanilhaCertaApplication {
 
 		ApplicationContext context = SpringApplication.run(PlanilhaCertaApplication.class, args);
 
+		System.out.println("O Projeto está rodando!.");
 		/*
 		// Obtenha o bean do serviço
 		ProjetosService projetosService = context.getBean(ProjetosService.class);
