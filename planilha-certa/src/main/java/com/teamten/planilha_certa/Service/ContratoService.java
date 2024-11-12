@@ -76,6 +76,8 @@ public class ContratoService {
 
                 contrato.setIdContrato(idCounter.incrementAndGet());
 
+                contrato.setPrioridadeAtendimento("Alta");
+
                 // Atualizar o cliente no banco de dados
                 ApiFuture<WriteResult> clienteUpdateFuture = clienteDocRef.set(cliente);
                 clienteUpdateFuture.get();
@@ -120,6 +122,8 @@ public class ContratoService {
                 }
 
                 contrato.setIdContrato(idCounter.incrementAndGet());
+
+                contrato.setPrioridadeAtendimento("Baixa");
 
                 // Atualizar o cliente no banco de dados
                 ApiFuture<WriteResult> clienteUpdateFuture = clienteDocRef.set(cliente);

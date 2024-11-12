@@ -50,6 +50,8 @@ private Firestore firestore;
         long newId = idCounter.incrementAndGet();
         cliente.setIdCliente(newId);
 
+        cliente.setCategoriaCliente("Padrão");
+
         CollectionReference clientes = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = clientes.document(String.valueOf(newId)).set(cliente);
 
@@ -65,6 +67,8 @@ private Firestore firestore;
     public ClienteVip cadastrarClienteVip(ClienteVip cliente) {
         long newId = idCounter.incrementAndGet();
         cliente.setIdCliente(newId);
+
+        cliente.setCategoriaCliente("Vip");
 
         CollectionReference clientes = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = clientes.document(String.valueOf(newId)).set(cliente);
