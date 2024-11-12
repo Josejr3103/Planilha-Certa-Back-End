@@ -52,8 +52,6 @@ public class EtapasService {
         long newId = idCounter.incrementAndGet();
         etapa.setIdEtapa(newId);
 
-        etapa.setNome("Analise Inicial");
-
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
 
@@ -70,8 +68,6 @@ public class EtapasService {
         long newId = idCounter.incrementAndGet();
         etapa.setIdEtapa(newId);
 
-        etapa.setNome("Implementação");
-
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
 
@@ -87,8 +83,6 @@ public class EtapasService {
     public EtapasRevisaoFinal cadastrarEtapasRevisaoFinal(EtapasRevisaoFinal etapa) {
         long newId = idCounter.incrementAndGet();
         etapa.setIdEtapa(newId);
-
-        etapa.setNome("Resevisão Final");
 
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
