@@ -1,18 +1,22 @@
 package com.teamten.planilha_certa.ClassTB5Etapas;
 
+import java.util.Date;
+
 public class Etapas {
     private long idProjeto;
     private long idEtapa;
     private String nome;
     private EtapaStatus statusDaEtapa;
+    private Date prazo;
     private float pagamento;
     private int faturamento;
 
-    public Etapas(long idProjeto, long idEtapa, String nome, EtapaStatus statusDaEtapa, float pagamento, int faturamento) {
+    public Etapas(long idProjeto, long idEtapa, String nome, EtapaStatus statusDaEtapa, Date prazo, float pagamento, int faturamento) {
         this.idProjeto = idProjeto;
         this.idEtapa = idEtapa;
         this.nome = nome;
         this.statusDaEtapa = statusDaEtapa;
+        this.prazo = prazo;
         this.pagamento = pagamento;
         this.faturamento = faturamento;
     }
@@ -51,6 +55,14 @@ public class Etapas {
 
     public void setStatusDaEtapa(EtapaStatus statusDaEtapa) {
         this.statusDaEtapa = statusDaEtapa;
+    }
+
+    public Date getPrazo() {
+        return prazo;
+    }
+
+    public void setPrazo(Date prazo) {
+        this.prazo = prazo;
     }
 
     public float getPagamento() {

@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class ContratoPriorBaixa extends Contrato {
 
-    public ContratoPriorBaixa(long idContrato, long idCliente, String nomeCliente, Date dataInicio, Date prazo,
+    public ContratoPriorBaixa(long idContrato, long idCliente, String nomeCliente, Date dataInicio,
                               float valorServico, float desconto) {
-        super(idContrato, idCliente, nomeCliente, dataInicio, prazo, valorServico, desconto, "Baixa");
+        super(idContrato, idCliente, nomeCliente, dataInicio, valorServico, desconto, "Baixa");
     }
 
     public ContratoPriorBaixa() {

@@ -7,21 +7,17 @@ public class Contrato {
     private long idCliente;
     private String nomeCliente;
     private Date dataInicio;
-    private Date prazo;
-    private String prazoDescricao;
     private float valorServico;
     private float desconto;
     private float valorLiquido;
     private String prioridadeAtendimento;
 
-    public Contrato(long idContrato, long idCliente, String nomeCliente, Date dataInicio, Date prazo, float valorServico,
+    public Contrato(long idContrato, long idCliente, String nomeCliente, Date dataInicio, float valorServico,
                     float desconto, String prioridadeAtendimento) {
         this.idContrato = idContrato;
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
         this.dataInicio = dataInicio;
-        this.prazo = prazo;
-        this.prazoDescricao = prazo.toString();
         this.valorServico = valorServico;
         this.desconto = desconto;
         this.valorLiquido = valorServico - desconto;
@@ -62,18 +58,6 @@ public class Contrato {
 
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
-    }
-
-    public Date getPrazo() {
-        return prazo;
-    }
-
-    public void setPrazo(Date prazo) {
-        this.prazo = prazo;
-    }
-
-    public String getPrazoDescricao() {
-        return prazoDescricao;
     }
 
     public float getValorServico() {
