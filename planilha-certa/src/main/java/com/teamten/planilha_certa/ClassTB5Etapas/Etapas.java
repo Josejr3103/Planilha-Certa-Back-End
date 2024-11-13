@@ -4,11 +4,11 @@ public class Etapas {
     private long idProjeto;
     private long idEtapa;
     private String nome;
-    private EtapaStatus statusDaEtapa;
+    private String statusDaEtapa;
     private float pagamento;
     private int faturamento;
 
-    public Etapas(long idProjeto, long idEtapa, String nome, EtapaStatus statusDaEtapa, float pagamento, int faturamento) {
+    public Etapas(long idProjeto, long idEtapa, String nome, String statusDaEtapa, float pagamento, int faturamento) {
         this.idProjeto = idProjeto;
         this.idEtapa = idEtapa;
         this.nome = nome;
@@ -45,11 +45,11 @@ public class Etapas {
         this.nome = nome;
     }
 
-    public EtapaStatus getStatusDaEtapa() {
+    public String getStatusDaEtapa() {
         return statusDaEtapa;
     }
 
-    public void setStatusDaEtapa(EtapaStatus statusDaEtapa) {
+    public void setStatusDaEtapa(String statusDaEtapa) {
         this.statusDaEtapa = statusDaEtapa;
     }
 

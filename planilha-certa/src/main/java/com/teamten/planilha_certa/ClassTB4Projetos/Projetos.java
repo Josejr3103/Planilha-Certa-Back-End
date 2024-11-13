@@ -6,18 +6,20 @@ public class Projetos {
     private String descricaoProjeto;
     private long idContrato;
     private long idConsultor;
+    private String nomeConsultor;
     private String servico;
     private String etapas;
 
     public Projetos(){
     }
 
-    public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String servico, String etapas) {
+    public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String nomeConsultor, String servico, String etapas) {
         this.idProjeto = idProjeto;
         this.nomeProjeto = nomeProjeto;
         this.descricaoProjeto = descricaoProjeto;
         this.idContrato = idContrato;
         this.idConsultor = idConsultor;
+        this.nomeConsultor = nomeConsultor;
         this.servico = servico;
         this.etapas = etapas;
     }
@@ -40,6 +42,10 @@ public class Projetos {
 
     public long getIdConsultor() {
         return idConsultor;
+    }
+
+    public String getNomeConsultor() {
+        return nomeConsultor;
     }
 
     public String getServico() {
@@ -68,6 +74,10 @@ public class Projetos {
 
     public void setIdConsultor(long idConsultor) {
         this.idConsultor = idConsultor;
+    }
+
+    public void setNomeConsultor(String nomeConsultor) {
+        this.nomeConsultor = nomeConsultor;
     }
 
     public void setServico(String servico) {
