@@ -2,9 +2,6 @@ package com.teamten.planilha_certa.Service;
 
 import com.google.cloud.firestore.*;
 import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasRevisaoFinal;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -48,47 +45,9 @@ public class EtapasService {
         }
     }
 
-    public EtapasAnaliseInicial cadastrarEtapasAnaliseInicial(EtapasAnaliseInicial etapa) {
+    public Etapas cadastrarEtapasAnaliseInicial(Etapas etapa) {
         long newId = idCounter.incrementAndGet();
         etapa.setIdEtapa(newId);
-
-        etapa.setNome("Analise Inicial");
-
-        CollectionReference etapas = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
-
-        try {
-            future.get();
-            return etapa;
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public EtapasImplementacao cadastrarEtapasImplementacao(EtapasImplementacao etapa) {
-        long newId = idCounter.incrementAndGet();
-        etapa.setIdEtapa(newId);
-
-        etapa.setNome("Implementação");
-
-        CollectionReference etapas = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
-
-        try {
-            future.get();
-            return etapa;
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public EtapasRevisaoFinal cadastrarEtapasRevisaoFinal(EtapasRevisaoFinal etapa) {
-        long newId = idCounter.incrementAndGet();
-        etapa.setIdEtapa(newId);
-
-        etapa.setNome("Resevisão Final");
 
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = etapas.document(String.valueOf(newId)).set(etapa);
@@ -143,11 +102,6 @@ public class EtapasService {
             return false;
         }
     }
-
-
-
-
-
 
 
 }

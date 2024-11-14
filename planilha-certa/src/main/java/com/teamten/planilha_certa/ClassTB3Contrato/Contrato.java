@@ -6,26 +6,25 @@ public class Contrato {
     private long idContrato;
     private long idCliente;
     private String nomeCliente;
+    private String cpfCliente;
     private Date dataInicio;
-    private Date prazo;
-    private String prazoDescricao;
     private float valorServico;
     private float desconto;
     private float valorLiquido;
     private String prioridadeAtendimento;
+    private boolean cadastro;
 
-    public Contrato(long idContrato, long idCliente, String nomeCliente, Date dataInicio, Date prazo, float valorServico,
-                    float desconto, String prioridadeAtendimento) {
+    public Contrato(long idContrato, long idCliente, String nomeCliente, String cpfCliente, Date dataInicio, float valorServico, float desconto, float valorLiquido, String prioridadeAtendimento, boolean cadastro) {
         this.idContrato = idContrato;
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
+        this.cpfCliente = cpfCliente;
         this.dataInicio = dataInicio;
-        this.prazo = prazo;
-        this.prazoDescricao = prazo.toString();
         this.valorServico = valorServico;
         this.desconto = desconto;
-        this.valorLiquido = valorServico - desconto;
+        this.valorLiquido = valorLiquido;
         this.prioridadeAtendimento = prioridadeAtendimento;
+        this.cadastro = cadastro;
     }
 
     public Contrato() {
@@ -64,17 +63,6 @@ public class Contrato {
         this.dataInicio = dataInicio;
     }
 
-    public Date getPrazo() {
-        return prazo;
-    }
-
-    public void setPrazo(Date prazo) {
-        this.prazo = prazo;
-    }
-
-    public String getPrazoDescricao() {
-        return prazoDescricao;
-    }
 
     public float getValorServico() {
         return valorServico;
@@ -104,5 +92,13 @@ public class Contrato {
 
     public void setPrioridadeAtendimento(String prioridadeAtendimento) {
         this.prioridadeAtendimento = prioridadeAtendimento;
+    }
+
+    public boolean isCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
     }
 }

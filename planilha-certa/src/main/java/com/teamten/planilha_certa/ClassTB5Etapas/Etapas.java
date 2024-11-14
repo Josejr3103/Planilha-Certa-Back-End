@@ -1,32 +1,62 @@
 package com.teamten.planilha_certa.ClassTB5Etapas;
 
 public class Etapas {
-    private long idProjeto;
+
     private long idEtapa;
+    private long idProjeto;
+    private long idContrato;
     private String nome;
-    private String statusDaEtapa;
+    private boolean analiseInicial;
+    private String statusAnaliseInicial;
+    private boolean implementacao;
+    private String statusImplementacao;
+    private boolean revisaoFinal;
+    private String statusRevisaoFinal;
     private float pagamento;
     private int faturamento;
+    private boolean cadastro;
 
-    public Etapas(long idProjeto, long idEtapa, String nome, String statusDaEtapa, float pagamento, int faturamento) {
-        this.idProjeto = idProjeto;
+    public Etapas(long idEtapa, long idProjeto, long idContrato,String nome, boolean analiseInicial, String statusAnaliseInicial, boolean implementacao, String statusImplementacao, boolean revisaoFinal, String statusRevisaoFinal, float pagamento, int faturamento, boolean cadastro) {
         this.idEtapa = idEtapa;
+        this.idProjeto = idProjeto;
+        this.idContrato = idContrato;
         this.nome = nome;
-        this.statusDaEtapa = statusDaEtapa;
+        this.analiseInicial = analiseInicial;
+        this.statusAnaliseInicial = statusAnaliseInicial;
+        this.implementacao = implementacao;
+        this.statusImplementacao = statusImplementacao;
+        this.revisaoFinal = revisaoFinal;
+        this.statusRevisaoFinal = statusRevisaoFinal;
         this.pagamento = pagamento;
         this.faturamento = faturamento;
+        this.cadastro = cadastro;
     }
 
     public Etapas() {
     }
 
-    // Getters e Setters
+    public boolean isCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
+    }
+
     public long getIdProjeto() {
         return idProjeto;
     }
 
     public void setIdProjeto(long idProjeto) {
         this.idProjeto = idProjeto;
+    }
+
+    public long getIdContrato() {
+        return idContrato;
+    }
+
+    public void setIdContrato(long idContrato) {
+        this.idContrato = idContrato;
     }
 
     public long getIdEtapa() {
@@ -45,12 +75,52 @@ public class Etapas {
         this.nome = nome;
     }
 
-    public String getStatusDaEtapa() {
-        return statusDaEtapa;
+    public boolean isAnaliseInicial() {
+        return analiseInicial;
     }
 
-    public void setStatusDaEtapa(String statusDaEtapa) {
-        this.statusDaEtapa = statusDaEtapa;
+    public void setAnaliseInicial(boolean analiseInicial) {
+        this.analiseInicial = analiseInicial;
+    }
+
+    public String getStatusAnaliseInicial() {
+        return statusAnaliseInicial;
+    }
+
+    public void setStatusAnaliseInicial(String statusAnaliseInicial) {
+        this.statusAnaliseInicial = statusAnaliseInicial;
+    }
+
+    public boolean isImplementacao() {
+        return implementacao;
+    }
+
+    public void setImplementacao(boolean implementacao) {
+        this.implementacao = implementacao;
+    }
+
+    public String getStatusImplementacao() {
+        return statusImplementacao;
+    }
+
+    public void setStatusImplementacao(String statusImplementacao) {
+        this.statusImplementacao = statusImplementacao;
+    }
+
+    public boolean isRevisaoFinal() {
+        return revisaoFinal;
+    }
+
+    public void setRevisaoFinal(boolean revisaoFinal) {
+        this.revisaoFinal = revisaoFinal;
+    }
+
+    public String getStatusRevisaoFinal() {
+        return statusRevisaoFinal;
+    }
+
+    public void setStatusRevisaoFinal(String statusRevisaoFinal) {
+        this.statusRevisaoFinal = statusRevisaoFinal;
     }
 
     public float getPagamento() {

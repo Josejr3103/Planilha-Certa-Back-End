@@ -20,7 +20,7 @@ public class ProjetosService {
     @Autowired
     private Firestore firestore;
 
-    private static final String COLLECTION_NAME = "projetos";
+    private static final String COLLECTION_NAME_PROJETOS = "projetos";
     private static final String COLLECTION_NAME_CONSULTORES = "consultores";
 
     private final AtomicLong idCounter = new AtomicLong();
@@ -32,7 +32,7 @@ public class ProjetosService {
 
     private void initializeIdCounter() {
         try {
-            CollectionReference projeto = firestore.collection(COLLECTION_NAME);
+            CollectionReference projeto = firestore.collection(COLLECTION_NAME_PROJETOS);
             ApiFuture<QuerySnapshot> query = projeto.get();
             List<QueryDocumentSnapshot> documents = query.get().getDocuments();
 
@@ -76,7 +76,7 @@ public class ProjetosService {
                 futureConsultorUpdate.get();
 
                 // Salvar o projeto
-                CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+                CollectionReference projetos = firestore.collection(COLLECTION_NAME_PROJETOS);
                 ApiFuture<WriteResult> futureProjeto = projetos.document(String.valueOf(newId)).set(projeto);
                 futureProjeto.get();
 
@@ -95,7 +95,7 @@ public class ProjetosService {
     public List<Projetos> listarProjetos() {
         List<Projetos> listaProjetos = new ArrayList<>();
         try {
-            CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+            CollectionReference projetos = firestore.collection(COLLECTION_NAME_PROJETOS);
             ApiFuture<QuerySnapshot> future = projetos.get();
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
@@ -110,7 +110,7 @@ public class ProjetosService {
 
     public boolean editarProjeto(Projetos projeto) {
         // Atualiza o projeto existente
-        CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+        CollectionReference projetos = firestore.collection(COLLECTION_NAME_PROJETOS);
         ApiFuture<WriteResult> future = projetos.document(String.valueOf(projeto.getIdProjeto())).set(projeto);
 
         try {
@@ -124,7 +124,7 @@ public class ProjetosService {
 
     public boolean excluirProjeto(long idProjeto) {
         // Exclui o projeto pelo ID
-        CollectionReference projetos = firestore.collection(COLLECTION_NAME);
+        CollectionReference projetos = firestore.collection(COLLECTION_NAME_PROJETOS);
         ApiFuture<WriteResult> future = projetos.document(String.valueOf(idProjeto)).delete();
 
         try {

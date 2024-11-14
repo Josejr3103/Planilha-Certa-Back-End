@@ -1,25 +1,8 @@
 package com.teamten.planilha_certa;
 
-import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
-import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorBaixa;
-import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasRevisaoFinal;
-import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
-import com.teamten.planilha_certa.ClassTB1Cliente.Cliente;
-import com.teamten.planilha_certa.ClassTB1Cliente.ClientePadrao;
-import com.teamten.planilha_certa.ClassTB1Cliente.ClienteVip;
-import com.teamten.planilha_certa.ClassTB2Consultor.Consultor;
-import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciFinanceiro;
-import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciGestao;
-import com.teamten.planilha_certa.ClassTB2Consultor.ConsultorEspeciTI;
-import com.teamten.planilha_certa.Service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.sql.Date;
 
 
 //https://console.firebase.google.com/u/0/project/planilhacerta-114b1/firestore/databases/-default-/data/~2Fclientes~2F0?hl=pt-br
