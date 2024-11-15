@@ -52,44 +52,62 @@ public class ContratoService {
 
     public ContratoPriorAlta cadastrarContratoPriorAlta(ContratoPriorAlta contrato) {
         try {
-            // Buscar cliente pelo ID
-            DocumentReference clienteDocRef = firestore.collection(COLLECTION_NAME_CLIENTES).document(String.valueOf(contrato.getIdCliente()));
-            ApiFuture<DocumentSnapshot> futureCliente = clienteDocRef.get();
-            DocumentSnapshot documentSnapshot = futureCliente.get();
+            // Buscar cliente pelo CPF
+            CollectionReference clientesCollection = firestore.collection(COLLECTION_NAME_CLIENTES);
+            Query clienteQuery = clientesCollection.whereEqualTo("cpfCliente", contrato.getCpfCliente());
+            ApiFuture<QuerySnapshot> clienteQuerySnapshot = clienteQuery.get();
+            List<QueryDocumentSnapshot> clienteDocuments = clienteQuerySnapshot.get().getDocuments();
 
-            if (documentSnapshot.exists()) {
-                Cliente cliente = documentSnapshot.toObject(Cliente.class);
+            if (!clienteDocuments.isEmpty()) {
+                // Assumindo que o CPF é único, pegamos o primeiro resultado
+                DocumentSnapshot clienteDocument = clienteDocuments.get(0);
+                Cliente cliente = clienteDocument.toObject(Cliente.class);
 
-                // Atualizar pontos do cliente
-                int novosPontos = cliente.getPontos() + 10;
-                cliente.setPontos(novosPontos);
+                // Verificar se o cliente é Vip
+                if ("Vip".equalsIgnoreCase(cliente.getCategoriaCliente())) {
+                    // Preencher idCliente e nomeCliente no contrato
+                    contrato.setIdCliente(cliente.getIdCliente());
+                    contrato.setNomeCliente(cliente.getNomeCliente());
 
-                // Aplicar desconto se os pontos forem 50
-                if (novosPontos >= 50) {
-                    contrato.setDesconto(contrato.getValorServico() * 0.5f);
                     // Atualizar pontos do cliente
-                    novosPontos = cliente.getPontos() * 0;
+                    int novosPontos = cliente.getPontos() + 10;
                     cliente.setPontos(novosPontos);
+
+                    // Aplicar desconto se os pontos forem 50
+                    if (novosPontos >= 50) {
+                        contrato.setDesconto(contrato.getValorServico() * 0.5f);
+                        novosPontos = 0; // Reiniciar pontos
+                    } else {
+                        contrato.setDesconto(0);
+                    }
+                    cliente.setPontos(novosPontos);
+
+                    // Gerar novo ID para o contrato e atualizar prioridade
+                    contrato.setIdContrato(idCounter.incrementAndGet());
+                    contrato.setPrioridadeAtendimento("Alta");
+
+                    // Atualizar histórico de contratos do cliente
+                    String historicoExistente = cliente.getHistoricoContratos();
+                    String novoHistorico = (historicoExistente == null || historicoExistente.isEmpty())
+                            ? "Contrato " + contrato.getIdContrato()
+                            : historicoExistente + ", Contrato " + contrato.getIdContrato();
+                    cliente.setHistoricoContratos(novoHistorico);
+
+                    // Salvar cliente com histórico atualizado no Firestore
+                    ApiFuture<WriteResult> clienteUpdateFuture = clienteDocument.getReference().set(cliente);
+                    clienteUpdateFuture.get();
+
+                    // Salvar contrato com desconto aplicado no Firestore
+                    CollectionReference contratos = firestore.collection(COLLECTION_NAME_CONTRATOS);
+                    ApiFuture<WriteResult> futureContrato = contratos.document(String.valueOf(contrato.getIdContrato())).set(contrato);
+
+                    futureContrato.get();
+                    return contrato;
                 } else {
-                    contrato.setDesconto(0);
+                    throw new RuntimeException("Cliente não é Vip");
                 }
-
-                contrato.setIdContrato(idCounter.incrementAndGet());
-
-                contrato.setPrioridadeAtendimento("Alta");
-
-                // Atualizar o cliente no banco de dados
-                ApiFuture<WriteResult> clienteUpdateFuture = clienteDocRef.set(cliente);
-                clienteUpdateFuture.get();
-
-                // Salvar contrato com desconto aplicado
-                CollectionReference contratos = firestore.collection(COLLECTION_NAME_CONTRATOS);
-                ApiFuture<WriteResult> futureContrato = contratos.document(String.valueOf(contrato.getIdContrato())).set(contrato);
-
-                futureContrato.get();
-                return contrato;
             } else {
-                throw new RuntimeException("Cliente não encontrado");
+                throw new RuntimeException("Cliente com CPF informado não encontrado");
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -97,46 +115,65 @@ public class ContratoService {
         }
     }
 
+
     public ContratoPriorBaixa cadastrarContratoPriorBaixa(ContratoPriorBaixa contrato) {
         try {
-            // Buscar cliente pelo ID
-            DocumentReference clienteDocRef = firestore.collection(COLLECTION_NAME_CLIENTES).document(String.valueOf(contrato.getIdCliente()));
-            ApiFuture<DocumentSnapshot> futureCliente = clienteDocRef.get();
-            DocumentSnapshot documentSnapshot = futureCliente.get();
+            // Buscar cliente pelo CPF
+            CollectionReference clientesCollection = firestore.collection(COLLECTION_NAME_CLIENTES);
+            Query clienteQuery = clientesCollection.whereEqualTo("cpfCliente", contrato.getCpfCliente());
+            ApiFuture<QuerySnapshot> clienteQuerySnapshot = clienteQuery.get();
+            List<QueryDocumentSnapshot> clienteDocuments = clienteQuerySnapshot.get().getDocuments();
 
-            if (documentSnapshot.exists()) {
-                Cliente cliente = documentSnapshot.toObject(Cliente.class);
+            if (!clienteDocuments.isEmpty()) {
+                // Assumindo que o CPF é único, pegamos o primeiro resultado
+                DocumentSnapshot clienteDocument = clienteDocuments.get(0);
+                Cliente cliente = clienteDocument.toObject(Cliente.class);
 
-                // Atualizar pontos do cliente
-                int novosPontos = cliente.getPontos() + 10;
-                cliente.setPontos(novosPontos);
+                // Verificar se o cliente é Vip
+                if ("Padrão".equalsIgnoreCase(cliente.getCategoriaCliente())) {
+                    // Preencher idCliente e nomeCliente no contrato
+                    contrato.setIdCliente(cliente.getIdCliente());
+                    contrato.setNomeCliente(cliente.getNomeCliente());
 
-                // Aplicar desconto se os pontos forem 50
-                if (novosPontos >= 50) {
-                    contrato.setDesconto(contrato.getValorServico() * 0.3f);
                     // Atualizar pontos do cliente
-                    novosPontos = cliente.getPontos() * 0;
+                    int novosPontos = cliente.getPontos() + 10;
                     cliente.setPontos(novosPontos);
+
+                    // Aplicar desconto se os pontos forem 50
+                    if (novosPontos >= 50) {
+                        contrato.setDesconto(contrato.getValorServico() * 0.5f);
+                        novosPontos = 0; // Reiniciar pontos
+                    } else {
+                        contrato.setDesconto(0);
+                    }
+                    cliente.setPontos(novosPontos);
+
+                    // Gerar novo ID para o contrato e atualizar prioridade
+                    contrato.setIdContrato(idCounter.incrementAndGet());
+                    contrato.setPrioridadeAtendimento("Baixa");
+
+                    // Atualizar histórico de contratos do cliente
+                    String historicoExistente = cliente.getHistoricoContratos();
+                    String novoHistorico = (historicoExistente == null || historicoExistente.isEmpty())
+                            ? "Contrato " + contrato.getIdContrato()
+                            : historicoExistente + ", Contrato " + contrato.getIdContrato();
+                    cliente.setHistoricoContratos(novoHistorico);
+
+                    // Salvar cliente com histórico atualizado no Firestore
+                    ApiFuture<WriteResult> clienteUpdateFuture = clienteDocument.getReference().set(cliente);
+                    clienteUpdateFuture.get();
+
+                    // Salvar contrato com desconto aplicado no Firestore
+                    CollectionReference contratos = firestore.collection(COLLECTION_NAME_CONTRATOS);
+                    ApiFuture<WriteResult> futureContrato = contratos.document(String.valueOf(contrato.getIdContrato())).set(contrato);
+
+                    futureContrato.get();
+                    return contrato;
                 } else {
-                    contrato.setDesconto(0);
+                    throw new RuntimeException("Cliente não é Padrão");
                 }
-
-                contrato.setIdContrato(idCounter.incrementAndGet());
-
-                contrato.setPrioridadeAtendimento("Baixa");
-
-                // Atualizar o cliente no banco de dados
-                ApiFuture<WriteResult> clienteUpdateFuture = clienteDocRef.set(cliente);
-                clienteUpdateFuture.get();
-
-                // Salvar contrato com desconto aplicado
-                CollectionReference contratos = firestore.collection(COLLECTION_NAME_CONTRATOS);
-                ApiFuture<WriteResult> futureContrato = contratos.document(String.valueOf(contrato.getIdContrato())).set(contrato);
-
-                futureContrato.get();
-                return contrato;
             } else {
-                throw new RuntimeException("Cliente não encontrado");
+                throw new RuntimeException("Cliente com CPF informado não encontrado");
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();

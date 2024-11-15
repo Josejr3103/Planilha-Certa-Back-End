@@ -31,6 +31,19 @@ public class Contrato {
     }
 
     // Getters e Setters
+
+    public String getCpfCliente() {
+        return cpfCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
+    }
+
+    public void setValorLiquido(float valorLiquido) {
+        this.valorLiquido = valorLiquido;
+    }
+
     public long getIdContrato() {
         return idContrato;
     }
