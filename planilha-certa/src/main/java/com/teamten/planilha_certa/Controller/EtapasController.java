@@ -37,10 +37,32 @@ public class EtapasController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> editarEtapa(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+    @PutMapping("/implementacao/{id}")
+    public ResponseEntity<String> editarEtapaImplementacao(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
         etapas.setIdEtapa(idEtapa);
-        boolean atualizado = etapasService.editarEtapa(etapas);
+        boolean atualizado = etapasService.editarEtapaImplementacao(etapas);
+        if (atualizado) {
+            return ResponseEntity.ok("Etapa atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Etapa.");
+        }
+    }
+
+    @PutMapping("/revisaofinal/{id}")
+    public ResponseEntity<String> editarEtapaRevisaoFinal(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+        etapas.setIdEtapa(idEtapa);
+        boolean atualizado = etapasService.editarEtapaRevisaoFinal(etapas);
+        if (atualizado) {
+            return ResponseEntity.ok("Etapa atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Etapa.");
+        }
+    }
+
+    @PutMapping("/conclusao/{id}")
+    public ResponseEntity<String> editarEtapaConclusao(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+        etapas.setIdEtapa(idEtapa);
+        boolean atualizado = etapasService.editarEtapaConclusao(etapas);
         if (atualizado) {
             return ResponseEntity.ok("Etapa atualizado com sucesso.");
         } else {

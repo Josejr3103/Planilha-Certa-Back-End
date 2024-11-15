@@ -78,6 +78,8 @@ public class ProjetosService {
             ApiFuture<WriteResult> futureContratoUpdate = contratoDoc.getReference().set(contrato);
             futureContratoUpdate.get();
 
+            // Marcar o projeto como cadastro falso
+            projeto.setCadastro(false);
             // Encontrar um consultor não alocado com a especialização correspondente
             CollectionReference consultores = firestore.collection(COLLECTION_NAME_CONSULTORES);
             Query query = consultores.whereEqualTo("alocado", false)
