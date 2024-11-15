@@ -136,12 +136,71 @@ public class EtapasService {
         return listarEtapas;
     }
 
-    public boolean editarEtapaImplementacao(Etapas Etapas) {
-        CollectionReference etapas = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = etapas.document(String.valueOf(Etapas.getIdEtapa())).set(Etapas);
-
+    public boolean editarEtapaImplementacao(Etapas etapas) {
         try {
-            future.get();
+            // Busca o documento existente
+            DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(String.valueOf(etapas.getIdEtapa()));
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            DocumentSnapshot snapshot = future.get();
+
+            if (!snapshot.exists()) {
+                System.out.println("Erro: Documento da etapa não encontrado.");
+                return false;
+            }
+
+            // Carrega os dados existentes
+            Etapas etapaAtual = snapshot.toObject(Etapas.class);
+            if (etapaAtual == null || etapaAtual.getIdContrato() == 0) {
+                System.out.println("Erro: Dados da etapa não foram carregados corretamente ou idContrato está inválido.");
+                System.out.println("Informações da etapa atual:");
+                System.out.println("ID Etapa: " + (etapaAtual != null ? etapaAtual.getIdEtapa() : "N/A"));
+                System.out.println("ID Contrato: " + (etapaAtual != null ? etapaAtual.getIdContrato() : "N/A"));
+                System.out.println("ID Projeto: " + (etapaAtual != null ? etapaAtual.getIdProjeto() : "N/A"));
+                return false;
+            }
+
+
+            // Atualiza apenas os campos necessários
+            etapaAtual.setImplementacao(true);
+            etapaAtual.setNome("Implementação");
+            etapaAtual.setStatusAnaliseInicial("Concluído");
+            etapaAtual.setStatusImplementacao("Em Andamento");
+            etapaAtual.setStatusRevisaoFinal("Em Aberto");
+
+            // Busca o contrato associado
+            CollectionReference contratos = firestore.collection("contratos");
+            ApiFuture<QuerySnapshot> contratosQuery = contratos.whereEqualTo("idContrato", etapaAtual.getIdContrato()).get();
+            List<QueryDocumentSnapshot> contratosDocs = contratosQuery.get().getDocuments();
+
+            if (contratosDocs.isEmpty()) {
+                System.out.println("Erro: Contrato "+etapaAtual.getIdContrato()+" do projeto "+etapaAtual.getIdProjeto()+" da etapa "+etapaAtual.getIdEtapa()+" associado não encontrado.");
+                return false;
+            }
+
+            Contrato contrato = contratosDocs.get(0).toObject(Contrato.class);
+            float valorLiquido = contrato.getValorLiquido();
+            etapaAtual.setPagamentoET2(valorLiquido * 0.3f);
+
+            // Busca o cliente associado ao contrato
+            CollectionReference clientes = firestore.collection("clientes");
+            ApiFuture<QuerySnapshot> clientesQuery = clientes.whereEqualTo("idCliente", contrato.getIdCliente()).get();
+            List<QueryDocumentSnapshot> clientesDocs = clientesQuery.get().getDocuments();
+
+            if (!clientesDocs.isEmpty()) {
+                Map<String, Object> clienteData = clientesDocs.get(0).getData();
+                String categoriaCliente = (String) clienteData.get("categoriaCliente");
+
+                if ("Vip".equalsIgnoreCase(categoriaCliente)) {
+                    etapaAtual.setDescontoET2(etapaAtual.getPagamentoET2() * 0.1f);
+                } else {
+                    etapaAtual.setDescontoET2(0);
+                }
+            }
+
+            // Atualiza os dados no Firestore
+            ApiFuture<WriteResult> writeResult = docRef.set(etapaAtual);
+            writeResult.get();
+
             return true;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -149,12 +208,73 @@ public class EtapasService {
         }
     }
 
-    public boolean editarEtapaRevisaoFinal(Etapas Etapas) {
-        CollectionReference etapas = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = etapas.document(String.valueOf(Etapas.getIdEtapa())).set(Etapas);
 
+
+    public boolean editarEtapaRevisaoFinal(Etapas etapas) {
         try {
-            future.get();
+            // Busca o documento existente
+            DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(String.valueOf(etapas.getIdEtapa()));
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            DocumentSnapshot snapshot = future.get();
+
+            if (!snapshot.exists()) {
+                System.out.println("Erro: Documento da etapa não encontrado.");
+                return false;
+            }
+
+            // Carrega os dados existentes
+            Etapas etapaAtual = snapshot.toObject(Etapas.class);
+            if (etapaAtual == null || etapaAtual.getIdContrato() == 0) {
+                System.out.println("Erro: Dados da etapa não foram carregados corretamente ou idContrato está inválido.");
+                System.out.println("Informações da etapa atual:");
+                System.out.println("ID Etapa: " + (etapaAtual != null ? etapaAtual.getIdEtapa() : "N/A"));
+                System.out.println("ID Contrato: " + (etapaAtual != null ? etapaAtual.getIdContrato() : "N/A"));
+                System.out.println("ID Projeto: " + (etapaAtual != null ? etapaAtual.getIdProjeto() : "N/A"));
+                return false;
+            }
+
+
+            // Atualiza apenas os campos necessários
+            etapaAtual.setImplementacao(true);
+            etapaAtual.setNome("Revisão Final");
+            etapaAtual.setStatusAnaliseInicial("Concluído");
+            etapaAtual.setStatusImplementacao("Concluído");
+            etapaAtual.setStatusRevisaoFinal("Em Andamento");
+
+            // Busca o contrato associado
+            CollectionReference contratos = firestore.collection("contratos");
+            ApiFuture<QuerySnapshot> contratosQuery = contratos.whereEqualTo("idContrato", etapaAtual.getIdContrato()).get();
+            List<QueryDocumentSnapshot> contratosDocs = contratosQuery.get().getDocuments();
+
+            if (contratosDocs.isEmpty()) {
+                System.out.println("Erro: Contrato "+etapaAtual.getIdContrato()+" do projeto "+etapaAtual.getIdProjeto()+" da etapa "+etapaAtual.getIdEtapa()+" associado não encontrado.");
+                return false;
+            }
+
+            Contrato contrato = contratosDocs.get(0).toObject(Contrato.class);
+            float valorLiquido = contrato.getValorLiquido();
+            etapaAtual.setPagamentoET3(valorLiquido * 0.3f);
+
+            // Busca o cliente associado ao contrato
+            CollectionReference clientes = firestore.collection("clientes");
+            ApiFuture<QuerySnapshot> clientesQuery = clientes.whereEqualTo("idCliente", contrato.getIdCliente()).get();
+            List<QueryDocumentSnapshot> clientesDocs = clientesQuery.get().getDocuments();
+
+            if (!clientesDocs.isEmpty()) {
+                Map<String, Object> clienteData = clientesDocs.get(0).getData();
+                String categoriaCliente = (String) clienteData.get("categoriaCliente");
+
+                if ("Vip".equalsIgnoreCase(categoriaCliente)) {
+                    etapaAtual.setDescontoET3(etapaAtual.getPagamentoET3() * 0.1f);
+                } else {
+                    etapaAtual.setDescontoET3(0);
+                }
+            }
+
+            // Atualiza os dados no Firestore
+            ApiFuture<WriteResult> writeResult = docRef.set(etapaAtual);
+            writeResult.get();
+
             return true;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -162,18 +282,88 @@ public class EtapasService {
         }
     }
 
-    public boolean editarEtapaConclusao(Etapas Etapas) {
-        CollectionReference etapas = firestore.collection(COLLECTION_NAME);
-        ApiFuture<WriteResult> future = etapas.document(String.valueOf(Etapas.getIdEtapa())).set(Etapas);
+    public boolean editarEtapaConclusao(Etapas etapas) {
+        CollectionReference etapasCollection = firestore.collection(COLLECTION_NAME);
+        DocumentReference docRef = etapasCollection.document(String.valueOf(etapas.getIdEtapa()));
 
         try {
-            future.get();
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            DocumentSnapshot snapshot = future.get();
+
+            if (!snapshot.exists()) {
+                System.out.println("Erro: Documento da etapa não encontrado.");
+                return false;
+            }
+
+            // Carrega os dados existentes
+            Etapas etapaAtual = snapshot.toObject(Etapas.class);
+            if (etapaAtual == null || etapaAtual.getIdContrato() == 0) {
+                System.out.println("Erro: Dados da etapa não foram carregados corretamente ou idContrato está inválido.");
+                return false;
+            }
+
+            // Atualiza os campos necessários
+            etapaAtual.setNome("Finalizado");
+            etapaAtual.setStatusAnaliseInicial("Concluído");
+            etapaAtual.setStatusImplementacao("Concluído");
+            etapaAtual.setStatusRevisaoFinal("Concluído");
+            etapaAtual.setRevisaoFinal(true);
+
+            // Busca o projeto associado para pegar o idConsultor
+            CollectionReference projetosCollection = firestore.collection("projetos");
+            ApiFuture<QuerySnapshot> projetosQuery = projetosCollection.whereEqualTo("idProjeto", etapaAtual.getIdProjeto()).get();
+            List<QueryDocumentSnapshot> projetosDocs = projetosQuery.get().getDocuments();
+
+            if (projetosDocs.isEmpty()) {
+                System.out.println("Erro: Projeto não encontrado.");
+                return false;
+            }
+
+            // Recuperando o idConsultor do projeto
+            Projetos projeto = projetosDocs.get(0).toObject(Projetos.class);
+            long idConsultor = projeto.getIdConsultor();
+
+            // Busca o consultor associado ao projeto
+            CollectionReference consultoresCollection = firestore.collection("consultores");
+            ApiFuture<QuerySnapshot> consultoresQuery = consultoresCollection.whereEqualTo("idConsultor", idConsultor).get();
+            List<QueryDocumentSnapshot> consultoresDocs = consultoresQuery.get().getDocuments();
+
+            if (consultoresDocs.isEmpty()) {
+                System.out.println("Erro: Consultor não encontrado.");
+                return false;
+            }
+
+            // Atualiza o consultor para não estar mais alocado
+            DocumentReference consultorRef = consultoresCollection.document(String.valueOf(idConsultor));
+            ApiFuture<WriteResult> updateConsultor = consultorRef.update("alocado", false);
+            updateConsultor.get();
+
+            // Preenche o campo faturamento
+            etapaAtual.setFaturamento("Emissão da nota fiscal " + etapaAtual.getIdContrato());
+
+            // Atualiza os valores de pagamento, desconto e líquido
+            float totalPagamento = etapaAtual.getPagamentoET1() + etapaAtual.getPagamentoET2() + etapaAtual.getPagamentoET3();
+            etapaAtual.setPagamento(totalPagamento);
+
+            float totalDesconto = etapaAtual.getDescontoET1() + etapaAtual.getDescontoET2() + etapaAtual.getDescontoET3();
+            etapaAtual.setDesconto(totalDesconto);
+
+            // Calculando o valor líquido
+            float totalLiquido = totalPagamento - totalDesconto;
+            etapaAtual.setLiquido(totalLiquido);
+
+            // Atualiza os dados no Firestore
+            ApiFuture<WriteResult> writeResult = docRef.set(etapaAtual);
+            writeResult.get();
+
             return true;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+
 
     public boolean excluirEtapa(long idEtapa) {
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);

@@ -21,7 +21,8 @@ public class Etapas {
     private float pagamentoET3;
     private float descontoET3;
     private float liquidoET3;
-    private int faturamento;
+    private String faturamento;
+    private float pagamento;
     private float desconto;
     private float liquido;
     private boolean cadastro;
@@ -29,7 +30,7 @@ public class Etapas {
     public Etapas() {
     }
 
-    public Etapas(long idEtapa, long idProjeto, long idContrato, String nome, boolean analiseInicial, String statusAnaliseInicial, float pagamentoET1, float descontoET1, float liquidoET1, boolean implementacao, String statusImplementacao, float pagamentoET2, float descontoET2, float liquidoET2, boolean revisaoFinal, String statusRevisaoFinal, float pagamentoET3, float descontoET3, float liquidoET3, int faturamento, float desconto, float liquido, boolean cadastro) {
+    public Etapas(long idEtapa, long idProjeto, long idContrato, String nome, boolean analiseInicial, String statusAnaliseInicial, float pagamentoET1, float descontoET1, float liquidoET1, boolean implementacao, String statusImplementacao, float pagamentoET2, float descontoET2, float liquidoET2, boolean revisaoFinal, String statusRevisaoFinal, float pagamentoET3, float descontoET3, float liquidoET3, String faturamento, float pagamento, float desconto, float liquido, boolean cadastro) {
         this.idEtapa = idEtapa;
         this.idProjeto = idProjeto;
         this.idContrato = idContrato;
@@ -50,9 +51,18 @@ public class Etapas {
         this.descontoET3 = descontoET3;
         this.liquidoET3 = liquidoET3;
         this.faturamento = faturamento;
+        this.pagamento = pagamento;
         this.desconto = desconto;
         this.liquido = liquido;
         this.cadastro = cadastro;
+    }
+
+    public float getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(float pagamento) {
+        this.pagamento = pagamento;
     }
 
     public long getIdEtapa() {
@@ -213,11 +223,11 @@ public class Etapas {
         this.liquidoET3 = liquidoET3;
     }
 
-    public int getFaturamento() {
+    public String getFaturamento() {
         return faturamento;
     }
 
-    public void setFaturamento(int faturamento) {
+    public void setFaturamento(String faturamento) {
         this.faturamento = faturamento;
     }
 
