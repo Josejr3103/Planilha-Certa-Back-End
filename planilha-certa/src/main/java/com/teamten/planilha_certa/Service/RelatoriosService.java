@@ -96,6 +96,24 @@ public class RelatoriosService {
                             relatorio.setDescontoET1(etapa.getDescontoET1());
                             relatorio.setLiquidoET1(etapa.getLiquidoET1());
 
+                            relatorio.setImplementacao(etapa.isImplementacao());
+                            relatorio.setStatusImplementacao(etapa.getStatusImplementacao());
+                            relatorio.setPagamentoET2(etapa.getPagamentoET2());
+                            relatorio.setDescontoET2(etapa.getDescontoET2());
+                            relatorio.setLiquidoET2(etapa.getLiquidoET2());
+
+                            relatorio.setRevisaoFinal(etapa.isRevisaoFinal());
+                            relatorio.setStatusRevisaoFinal(etapa.getStatusRevisaoFinal());
+                            relatorio.setPagamentoET3(etapa.getPagamentoET3());
+                            relatorio.setDescontoET3(etapa.getDescontoET3());
+                            relatorio.setLiquidoET3(etapa.getLiquidoET3());
+
+                            relatorio.setFaturamento(etapa.getFaturamento());
+                            relatorio.setPagamento(etapa.getPagamento());
+                            relatorio.setDescontoEtapa(etapa.getDesconto());
+                            relatorio.setLiquido(etapa.getLiquido());
+
+
                             relatoriosList.add(relatorio);
                         }
                     }
@@ -108,6 +126,7 @@ public class RelatoriosService {
         return relatoriosList;
     }
 
+    /*
     // Método para criar um novo relatório
     public Relatorios criarRelatorio(Relatorios relatorio) {
         try {
@@ -124,4 +143,5 @@ public class RelatoriosService {
             throw new RuntimeException("Erro ao criar relatório", e);
         }
     }
+     */
 }

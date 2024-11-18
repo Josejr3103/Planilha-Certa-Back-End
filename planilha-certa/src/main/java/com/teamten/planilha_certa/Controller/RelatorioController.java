@@ -30,6 +30,7 @@ public class RelatorioController {
         }
     }
 
+    /*
     @PostMapping("/criar")
     public ResponseEntity<?> criarRelatorio(@RequestBody Relatorios relatorio) {
         try {
@@ -40,4 +41,5 @@ public class RelatorioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar relatório: " + e.getMessage());
         }
     }
+     */
 }
