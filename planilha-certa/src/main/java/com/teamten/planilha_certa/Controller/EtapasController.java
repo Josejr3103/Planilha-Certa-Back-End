@@ -1,11 +1,6 @@
 package com.teamten.planilha_certa.Controller;
 
-import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
-import com.teamten.planilha_certa.ClassTB3Contrato.ContratoPriorAlta;
 import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasAnaliseInicial;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasImplementacao;
-import com.teamten.planilha_certa.ClassTB5Etapas.EtapasRevisaoFinal;
 import com.teamten.planilha_certa.Service.EtapasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,29 +17,9 @@ public class EtapasController {
     @Autowired
     private EtapasService etapasService;
 
-    @PostMapping("/analiseinicial")
-    public ResponseEntity<EtapasAnaliseInicial> cadastrarEtapasAnaliseInicial(@RequestBody EtapasAnaliseInicial etapa) {
-        EtapasAnaliseInicial novoEtapa = etapasService.cadastrarEtapasAnaliseInicial(etapa);
-        if (novoEtapa != null) {
-            return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @PostMapping("/implementacao")
-    public ResponseEntity<EtapasImplementacao> cadastrarEtapasImplementacao(@RequestBody EtapasImplementacao etapa) {
-        EtapasImplementacao novoEtapa = etapasService.cadastrarEtapasImplementacao(etapa);
-        if (novoEtapa != null) {
-            return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @PostMapping("/revisaofinal")
-    public ResponseEntity<EtapasRevisaoFinal> cadastrarEtapasRevisaoFinal(@RequestBody EtapasRevisaoFinal etapa) {
-        EtapasRevisaoFinal novoEtapa = etapasService.cadastrarEtapasRevisaoFinal(etapa);
+    @PostMapping
+    public ResponseEntity<Etapas> cadastrarEtapasAnaliseInicial(@RequestBody Etapas etapa) {
+        Etapas novoEtapa = etapasService.cadastrarEtapasAnaliseInicial(etapa);
         if (novoEtapa != null) {
             return new ResponseEntity<>(novoEtapa, HttpStatus.CREATED);
         } else {
@@ -62,10 +37,32 @@ public class EtapasController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> editarEtapa(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+    @PutMapping("/implementacao/{id}")
+    public ResponseEntity<String> editarEtapaImplementacao(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
         etapas.setIdEtapa(idEtapa);
-        boolean atualizado = etapasService.editarEtapa(etapas);
+        boolean atualizado = etapasService.editarEtapaImplementacao(etapas);
+        if (atualizado) {
+            return ResponseEntity.ok("Etapa atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Etapa.");
+        }
+    }
+
+    @PutMapping("/revisaofinal/{id}")
+    public ResponseEntity<String> editarEtapaRevisaoFinal(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+        etapas.setIdEtapa(idEtapa);
+        boolean atualizado = etapasService.editarEtapaRevisaoFinal(etapas);
+        if (atualizado) {
+            return ResponseEntity.ok("Etapa atualizado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar Etapa.");
+        }
+    }
+
+    @PutMapping("/conclusao/{id}")
+    public ResponseEntity<String> editarEtapaConclusao(@PathVariable("id") long idEtapa, @RequestBody Etapas etapas) {
+        etapas.setIdEtapa(idEtapa);
+        boolean atualizado = etapasService.editarEtapaConclusao(etapas);
         if (atualizado) {
             return ResponseEntity.ok("Etapa atualizado com sucesso.");
         } else {

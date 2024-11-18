@@ -4,11 +4,13 @@ public class Consultor {
     private long idConsultor;
     private String nomeConsultor;
     private String especializacao;
+    private boolean alocado;
 
-    public Consultor(long idConsultor, String nomeConsultor, String especializacao) {
+    public Consultor(long idConsultor, String nomeConsultor, String especializacao, boolean alocado) {
         this.idConsultor = idConsultor;
         this.nomeConsultor = nomeConsultor;
         this.especializacao = especializacao;
+        this.alocado = alocado;
     }
 
     public Consultor() {
@@ -37,5 +39,12 @@ public class Consultor {
 
     public void setEspecializacao(String especializacao) {
         this.especializacao = especializacao;
+    }
+
+    public boolean isAlocado() {
+        return alocado;
+    }
+    public void setAlocado(boolean alocado) {
+        this.alocado = alocado;
     }
 }

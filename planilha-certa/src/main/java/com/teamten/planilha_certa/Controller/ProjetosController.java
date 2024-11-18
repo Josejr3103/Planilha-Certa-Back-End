@@ -17,9 +17,29 @@ public class ProjetosController {
     @Autowired
     private ProjetosService projetosService;
 
-    @PostMapping
-    public ResponseEntity<Projetos> cadastrarProjeto(@RequestBody Projetos projetos) {
-        Projetos novoProjeto = projetosService.cadastrarProjeto(projetos);
+    @PostMapping("/financeiro")
+    public ResponseEntity<Projetos> cadastrarProjetoFinanceiro(@RequestBody Projetos projetos) {
+        Projetos novoProjeto = projetosService.cadastrarProjetoFinanceiro(projetos);
+        if (novoProjeto != null) {
+            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/gestao")
+    public ResponseEntity<Projetos> cadastrarProjetoGestao(@RequestBody Projetos projetos) {
+        Projetos novoProjeto = projetosService.cadastrarProjetoGestao(projetos);
+        if (novoProjeto != null) {
+            return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/ti")
+    public ResponseEntity<Projetos> cadastrarProjetoTi(@RequestBody Projetos projetos) {
+        Projetos novoProjeto = projetosService.cadastrarProjetoTi(projetos);
         if (novoProjeto != null) {
             return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
         } else {

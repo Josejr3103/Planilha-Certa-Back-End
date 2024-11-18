@@ -3,22 +3,23 @@ package com.teamten.planilha_certa.ClassTB1Cliente;
 public class Cliente {
     private long idCliente;
     private String nomeCliente;
+    private String cpfCliente;
     private String categoriaCliente;
     private String historicoContratos;
     private int pontos;
 
-    public Cliente() {
-    }
-
-    public Cliente(long idCliente, String nomeCliente, String categoriaCliente, String historicoContratos, int pontos) {
+    public Cliente(long idCliente, String nomeCliente, String cpfCliente, String categoriaCliente, String historicoContratos, int pontos) {
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
+        this.cpfCliente = cpfCliente;
         this.categoriaCliente = categoriaCliente;
         this.historicoContratos = historicoContratos;
         this.pontos = pontos;
     }
 
-    // Getters e Setters
+    public Cliente() {
+    }
+
     public long getIdCliente() {
         return idCliente;
     }
@@ -35,6 +36,14 @@ public class Cliente {
         this.nomeCliente = nomeCliente;
     }
 
+    public String getCpfCliente() {
+        return cpfCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
+    }
+
     public String getCategoriaCliente() {
         return categoriaCliente;
     }
@@ -42,7 +51,6 @@ public class Cliente {
     public void setCategoriaCliente(String categoriaCliente) {
         this.categoriaCliente = categoriaCliente;
     }
-
 
     public String getHistoricoContratos() {
         return historicoContratos;

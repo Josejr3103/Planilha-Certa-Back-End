@@ -53,6 +53,10 @@ public class ConsultorService {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
 
+        consultor.setEspecializacao("Financeiro");
+
+        consultor.setAlocado(false); // Define como não alocado inicialmente
+
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);
 
@@ -69,6 +73,10 @@ public class ConsultorService {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
 
+        consultor.setEspecializacao("Gestão");
+
+        consultor.setAlocado(false); // Define como não alocado inicialmente
+
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);
 
@@ -84,6 +92,10 @@ public class ConsultorService {
     public ConsultorEspeciTI cadastrarConsultorEspeciTI(ConsultorEspeciTI consultor) {
         long newId = idCounter.incrementAndGet();
         consultor.setIdConsultor(newId);
+
+        consultor.setEspecializacao("TI");
+
+        consultor.setAlocado(false); // Define como não alocado inicialmente
 
         CollectionReference consultores = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = consultores.document(String.valueOf(newId)).set(consultor);

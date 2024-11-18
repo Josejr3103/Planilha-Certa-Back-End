@@ -6,20 +6,31 @@ public class Projetos {
     private String descricaoProjeto;
     private long idContrato;
     private long idConsultor;
+    private String nomeConsultor;
     private String servico;
-    private String etapas;
+    private boolean cadastro;
 
     public Projetos(){
     }
 
-    public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String servico, String etapas) {
+    public Projetos(long idProjeto, String nomeProjeto, String descricaoProjeto, long idContrato, long idConsultor, String nomeConsultor, String servico, boolean cadastro) {
         this.idProjeto = idProjeto;
         this.nomeProjeto = nomeProjeto;
         this.descricaoProjeto = descricaoProjeto;
         this.idContrato = idContrato;
         this.idConsultor = idConsultor;
+        this.nomeConsultor = nomeConsultor;
         this.servico = servico;
-        this.etapas = etapas;
+        this.cadastro = cadastro;
+    }
+
+
+    public boolean isCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
     }
 
     public long getIdProjeto() {
@@ -42,13 +53,14 @@ public class Projetos {
         return idConsultor;
     }
 
+    public String getNomeConsultor() {
+        return nomeConsultor;
+    }
+
     public String getServico() {
         return servico;
     }
 
-    public String getEtapas() {
-        return etapas;
-    }
 
     public void setIdProjeto(long idProjeto) {
         this.idProjeto = idProjeto;
@@ -70,12 +82,13 @@ public class Projetos {
         this.idConsultor = idConsultor;
     }
 
+    public void setNomeConsultor(String nomeConsultor) {
+        this.nomeConsultor = nomeConsultor;
+    }
+
     public void setServico(String servico) {
         this.servico = servico;
     }
 
-    public void setEtapas(String etapas) {
-        this.etapas = etapas;
-    }
 }
 
