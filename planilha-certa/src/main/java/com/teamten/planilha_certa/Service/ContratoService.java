@@ -74,7 +74,7 @@ public class ContratoService {
                     cliente.setPontos(novosPontos);
 
                     // Aplicar desconto se os pontos forem 50
-                    if (novosPontos >= 50) {
+                    if (novosPontos >= 20) {
                         contrato.setDesconto(contrato.getValorServico() * 0.5f);
                         novosPontos = 0; // Reiniciar pontos
                     } else {
@@ -140,8 +140,8 @@ public class ContratoService {
                     cliente.setPontos(novosPontos);
 
                     // Aplicar desconto se os pontos forem 50
-                    if (novosPontos >= 50) {
-                        contrato.setDesconto(contrato.getValorServico() * 0.5f);
+                    if (novosPontos >= 20) {
+                        contrato.setDesconto(contrato.getValorServico() * 0.3f);
                         novosPontos = 0; // Reiniciar pontos
                     } else {
                         contrato.setDesconto(0);

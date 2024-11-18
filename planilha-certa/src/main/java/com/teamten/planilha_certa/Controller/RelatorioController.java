@@ -1,6 +1,6 @@
 package com.teamten.planilha_certa.Controller;
 
-import com.teamten.planilha_certa.ClassTB6Relatorios.Relatorios;
+import com.teamten.planilha_certa.ClassTB6Relatorio.Relatorios;
 import com.teamten.planilha_certa.Service.RelatoriosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

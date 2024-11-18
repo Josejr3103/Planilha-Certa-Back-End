@@ -7,7 +7,7 @@ import com.teamten.planilha_certa.ClassTB3Contrato.Contrato;
 import com.teamten.planilha_certa.ClassTB4Projetos.Projetos;
 import com.teamten.planilha_certa.ClassTB2Consultor.Consultor;
 import com.teamten.planilha_certa.ClassTB5Etapas.Etapas;
-import com.teamten.planilha_certa.ClassTB6Relatorios.Relatorios;
+import com.teamten.planilha_certa.ClassTB6Relatorio.Relatorios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
