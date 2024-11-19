@@ -9,5 +9,4 @@ public class ConsultorEspeciFinanceiro extends Consultor {
     public ConsultorEspeciFinanceiro() {
     }
 
-    // Métodos específicos para ConsultorEspeciFinanceiro podem ser adicionados aqui
 }

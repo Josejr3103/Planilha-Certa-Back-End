@@ -24,7 +24,6 @@ public class Projetos {
         this.cadastro = cadastro;
     }
 
-
     public boolean isCadastro() {
         return cadastro;
     }
@@ -60,7 +59,6 @@ public class Projetos {
     public String getServico() {
         return servico;
     }
-
 
     public void setIdProjeto(long idProjeto) {
         this.idProjeto = idProjeto;

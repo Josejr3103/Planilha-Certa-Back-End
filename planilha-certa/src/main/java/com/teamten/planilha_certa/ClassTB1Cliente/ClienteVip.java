@@ -9,6 +9,4 @@ public class ClienteVip extends Cliente {
     public ClienteVip(long idCliente, String nomeCliente, String cpfCliente, String historicoContratos, int pontos) {
         super(idCliente, nomeCliente, cpfCliente, "Vip",historicoContratos, pontos);
     }
-
-    // Métodos específicos para ClienteVip podem ser adicionados aqui
 }

@@ -115,7 +115,6 @@ public class ContratoService {
         }
     }
 
-
     public ContratoPriorBaixa cadastrarContratoPriorBaixa(ContratoPriorBaixa contrato) {
         try {
             // Buscar cliente pelo CPF

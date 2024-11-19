@@ -50,7 +50,6 @@ public class ProjetosService {
         }
     }
 
-
     public Projetos cadastrarProjetoFinanceiro(Projetos projeto) {
         long newId = idCounter.incrementAndGet();
         projeto.setIdProjeto(newId);
@@ -238,7 +237,6 @@ public class ProjetosService {
             return null;
         }
     }
-
 
     public List<Projetos> listarProjetos() {
         List<Projetos> listaProjetos = new ArrayList<>();

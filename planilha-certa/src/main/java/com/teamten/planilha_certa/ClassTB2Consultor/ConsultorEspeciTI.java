@@ -9,5 +9,4 @@ public class ConsultorEspeciTI extends Consultor {
     public ConsultorEspeciTI() {
     }
 
-    // Métodos específicos para ConsultorEspeciTI podem ser adicionados aqui
 }

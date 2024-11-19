@@ -30,8 +30,6 @@ public class Contrato {
     public Contrato() {
     }
 
-    // Getters e Setters
-
     public String getCpfCliente() {
         return cpfCliente;
     }
@@ -75,7 +73,6 @@ public class Contrato {
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
-
 
     public float getValorServico() {
         return valorServico;

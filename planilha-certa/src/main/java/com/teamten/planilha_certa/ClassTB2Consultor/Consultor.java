@@ -16,7 +16,6 @@ public class Consultor {
     public Consultor() {
     }
 
-    // Getters e Setters
     public long getIdConsultor() {
         return idConsultor;
     }

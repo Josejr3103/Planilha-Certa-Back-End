@@ -208,8 +208,6 @@ public class EtapasService {
         }
     }
 
-
-
     public boolean editarEtapaRevisaoFinal(Etapas etapas) {
         try {
             // Busca o documento existente
@@ -363,8 +361,6 @@ public class EtapasService {
         }
     }
 
-
-
     public boolean excluirEtapa(long idEtapa) {
         CollectionReference etapas = firestore.collection(COLLECTION_NAME);
         ApiFuture<WriteResult> future = etapas.document(String.valueOf(idEtapa)).delete();
@@ -377,6 +373,5 @@ public class EtapasService {
             return false;
         }
     }
-
 
 }
